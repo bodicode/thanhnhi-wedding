@@ -87,7 +87,7 @@ export default function Hero() {
           className="flex flex-col items-center space-y-4"
         >
           <p className="font-serif text-2xl md:text-4xl text-ink font-medium tracking-[0.15em] drop-shadow-sm uppercase">
-            05 <span className="text-gold-accent mx-1">.</span> 07 <span className="text-gold-accent mx-1">.</span> 2027
+            05 <span className="text-gold-accent mx-1">.</span> 07 <span className="text-gold-accent mx-1">.</span> 2026
           </p>
           <span className="text-ink-light text-md md:text-base italic font-serif opacity-90">
             (Nhằm ngày 21 tháng 05 năm Bính Ngọ)

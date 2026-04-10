@@ -12,7 +12,7 @@ export default function MusicPlayer() {
       audioRef.current.volume = 0.4;
       // Tự động phát khi component được render (sau khi user đã tương tác click "Mở thiệp")
       const playPromise = audioRef.current.play();
-      
+
       if (playPromise !== undefined) {
         playPromise
           .then(() => setIsPlaying(true))
@@ -39,10 +39,10 @@ export default function MusicPlayer() {
     <div className="fixed bottom-6 left-6 z-[60]">
       <audio
         ref={audioRef}
-        src="/BeautifulInWhite.mp3"
+        src="/CuoiDi.mp3"
         loop
       />
-      
+
       <motion.button
         onClick={toggleMusic}
         initial={{ opacity: 0, scale: 0.8 }}
@@ -56,14 +56,14 @@ export default function MusicPlayer() {
           {isPlaying && (
             <motion.div
               initial={{ scale: 1, opacity: 0 }}
-              animate={{ 
+              animate={{
                 scale: [1, 1.5],
                 opacity: [0.5, 0]
               }}
-              transition={{ 
-                duration: 2, 
+              transition={{
+                duration: 2,
                 repeat: Infinity,
-                ease: "easeOut" 
+                ease: "easeOut"
               }}
               className="absolute inset-0 rounded-full border border-gold-accent"
             />
@@ -72,7 +72,7 @@ export default function MusicPlayer() {
 
         {/* Music Icon / Vinyl Style */}
         <div className="relative flex items-center justify-center">
-          <motion.div 
+          <motion.div
             animate={isPlaying ? { rotate: 360 } : { rotate: 0 }}
             transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
             className="text-ink"

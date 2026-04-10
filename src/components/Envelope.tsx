@@ -207,7 +207,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
                 boxShadow: '0 2px 12px rgba(100,60,20,0.1)',
                 zIndex: 10,
               }}
-              animate={{ y: isAnimating ? '-80%' : 0 }}
+              animate={{ y: isAnimating ? '-45%' : 0 }}
               transition={{ duration: 1.5, delay: 0.35, ease: [0.16, 1, 0.3, 1] as const }}
             >
               <div className="absolute inset-2 sm:inset-3 rounded-sm pointer-events-none"
@@ -221,7 +221,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
                 </div>
               </div>
             </motion.div>
-            
+
             {/* Envelope pocket flaps — z-index 20 (always in front of card) */}
             <div className="absolute inset-0" style={{ zIndex: 20 }}>
               {/* Left flap */}

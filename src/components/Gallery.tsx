@@ -52,7 +52,7 @@ export default function Gallery() {
   const src = `/gallery/${IMAGE_NAMES[activeIndex]}`;
 
   return (
-    <section className="relative py-20 bg-paper overflow-hidden">
+    <section className="relative py-10 bg-paper overflow-hidden">
 
       {/* Header */}
       <motion.div
@@ -211,7 +211,7 @@ export default function Gallery() {
                   />
                 </motion.div>
               </AnimatePresence>
-              
+
               {/* Internal Navigation Buttons */}
               <button
                 onClick={(e) => { e.stopPropagation(); goTo(activeIndex - 1); }}

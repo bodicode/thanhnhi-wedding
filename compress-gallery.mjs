@@ -10,7 +10,7 @@ import { join, extname } from 'path';
 
 const GALLERY_DIR = './public/gallery';
 const OUTPUT_QUALITY = 82;       // JPEG quality — visually lossless for wedding photos
-const MAX_WIDTH     = 2400;      // Sufficient for a 30-inch monitor
+const MAX_WIDTH = 2400;      // Sufficient for a 30-inch monitor
 const BACKUP_SUFFIX = '.bak';    // Original files will be kept as *.jpg.bak
 
 async function main() {
@@ -20,7 +20,7 @@ async function main() {
   console.log(`Found ${files.length} images. Compressing...`);
 
   for (const file of files) {
-    const inputPath  = join(GALLERY_DIR, file);
+    const inputPath = join(GALLERY_DIR, file);
     const outputPath = join(GALLERY_DIR, file + BACKUP_SUFFIX); // temp
 
     // Backup original
@@ -32,7 +32,7 @@ async function main() {
         .jpeg({ quality: OUTPUT_QUALITY, mozjpeg: true })
         .toFile(inputPath);
 
-      const sizeMB_orig   = (await import('fs')).statSync(outputPath).size / 1_048_576;
+      const sizeMB_orig = (await import('fs')).statSync(outputPath).size / 1_048_576;
       const sizeMB_result = info.size / 1_048_576;
 
       console.log(

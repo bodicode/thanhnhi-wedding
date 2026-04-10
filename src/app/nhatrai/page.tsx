@@ -23,7 +23,7 @@ export default function NhaTrai() {
           <Envelope onOpen={() => setIsOpened(true)} />
         )}
       </AnimatePresence>
-      
+
       {/* Preload Hero Image for faster visual appearance after open */}
       <div className="hidden" aria-hidden="true">
         <motion.div
@@ -31,13 +31,13 @@ export default function NhaTrai() {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          <Image 
-            src="/gallery/6.jpg" 
-            alt="Preload" 
-            width={1920} 
-            height={1080} 
-            priority 
-            quality={1} 
+          <Image
+            src="/gallery/6.jpg"
+            alt="Preload"
+            width={1920}
+            height={1080}
+            priority
+            quality={1}
           />
         </motion.div>
       </div>
@@ -51,8 +51,8 @@ export default function NhaTrai() {
             <Schedule />
             <Gallery />
             <RSVP />
-            <Countdown />
             <Guestbook />
+            <Countdown />
           </div>
         </main>
       )}

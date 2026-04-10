@@ -4,9 +4,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 export default function Hero() {
-  const handleMusicToggle = () => {
-    window.dispatchEvent(new CustomEvent('toggle-wedding-music'));
-  };
 
   return (
     <section className="relative min-h-screen flex flex-col bg-paper overflow-hidden">
@@ -30,12 +27,12 @@ export default function Hero() {
         </motion.div>
 
         {/* Text Overlay on Image */}
-        <div className="absolute inset-x-0 bottom-12 md:bottom-20 flex flex-col items-center justify-center text-white z-10 px-6 w-full">
+        <div className="absolute inset-x-0 bottom-12 md:bottom-20 flex flex-col items-center justify-center text-white z-10 px-6 w-full md:inset-x-0 md:top-auto inset-0">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="font-script text-5xl md:text-[10rem] mb-4 drop-shadow-lg text-center w-full"
+            className="font-script text-7xl md:text-[10rem] mb-4 drop-shadow-lg text-center w-full"
           >
             We get married!
           </motion.h2>
@@ -45,7 +42,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.8 }}
             className="flex flex-col items-center text-center w-full"
           >
-            <h1 className="font-serif text-xl md:text-4xl tracking-widest md:tracking-[0.2em] font-medium uppercase drop-shadow-md text-center w-full">
+            <h1 className="font-serif text-2xl md:text-4xl tracking-widest md:tracking-[0.2em] font-medium uppercase drop-shadow-md text-center w-full">
               QUÝ THANH & UYỂN NHI
             </h1>
             <div className="w-12 h-[1px] bg-white/60 mt-4 md:mt-6" />

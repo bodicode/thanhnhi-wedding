@@ -35,7 +35,7 @@ export default function Invitation() {
         <div className="grid grid-cols-2 gap-4 md:gap-x-16 w-full max-w-5xl mx-auto mb-20 items-start">
           {[
             { role: 'Chú rể', name: 'Quý Thanh', sub: 'Út Nam', src: '/chure.jpg', alt: 'Chú rể', quality: 75, x: -40 },
-            { role: 'Cô dâu', name: 'Uyển Nhi', sub: 'Trưởng Nữ', src: '/codau.jpg', alt: 'Cô dâu', quality: 65, x: 40 },
+            { role: 'Cô dâu', name: 'Uyển Nhi', sub: 'Trưởng Nữ', src: '/codau.jpg', alt: 'Cô dâu', quality: 75, x: 40 },
           ].map((p, i) => (
             <motion.div
               key={i}
@@ -46,7 +46,7 @@ export default function Invitation() {
               <div className="text-center">
                 <span className="font-script text-4xl md:text-6xl text-ink leading-none block mb-2 md:mb-4">{p.role}</span>
                 <h1 className="font-serif text-xl md:text-7xl text-ink font-bold tracking-wider uppercase mb-1 md:mb-2 leading-tight">{p.name}</h1>
-                <p className="text-xs md:text-sm tracking-[0.3em] uppercase text-ink font-semibold">{p.sub}</p>
+                <p className="text-xs md:text-sm uppercase text-ink font-semibold">{p.sub}</p>
               </div>
               <div className="w-full aspect-[3/4] relative overflow-hidden bg-stone-100 shadow-[10px_10px_30px_rgba(0,0,0,0.05)] md:shadow-[20px_20px_60px_rgba(0,0,0,0.05)] border-4 md:border-8 border-white ring-1 ring-black/5">
                 <Image src={p.src} alt={p.alt} fill className="object-cover hover:scale-105 transition-transform duration-1000" sizes="(max-width: 768px) 50vw, 50vw" priority quality={p.quality} />
@@ -88,7 +88,7 @@ export default function Invitation() {
             <div className="grid grid-cols-2 gap-6 md:gap-10 items-stretch">
               {[
                 { title: 'Nhà Trai', bo: 'Phùng Văn Thanh', me: 'Phan Thị Thanh', addr: 'P. Trấn Biên, T. Đồng Nai' },
-                { title: 'Nhà Gái', bo: 'Đinh Nguyễn Thị Ngân', me: 'Hoàng Thị Thu Hiền', addr: 'P. Tân Triều, T. Đồng Nai' },
+                { title: 'Nhà Gái', bo: 'Đinh Nguyễn Thụy Ngân', me: 'Hoàng Thị Thu Hiền', addr: 'P. Tân Triều, T. Đồng Nai' },
               ].map((f, i) => (
                 <motion.div
                   key={i}
@@ -96,13 +96,13 @@ export default function Invitation() {
                   initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
                   transition={{ duration: 0.9, delay: 0.5 + i * 0.15 }}
                 >
-                  <div className="h-[130px]">
-                    <p className="font-serif font-bold text-lg md:text-base tracking-widest uppercase text-ink mb-3">{f.title}</p>
-                    <p className="text-base md:text-xl text-ink font-serif tracking-wide leading-relaxed"><span className="font-semibold">Bố:</span> {f.bo}</p>
-                    <p className="text-base md:text-xl text-ink font-serif tracking-wide leading-relaxed"><span className="font-semibold">Mẹ:</span> {f.me}</p>
+                  <div className="h-[80px]">
+                    <p className="font-serif font-bold text-md md:text-base tracking-widest uppercase text-ink mb-3">{f.title}</p>
+                    <p className="text-[12px] md:text-xl text-ink font-serif tracking-wide leading-relaxed"><span className="font-semibold">Bố:</span> {f.bo}</p>
+                    <p className="text-[12px] md:text-xl text-ink font-serif tracking-wide leading-relaxed"><span className="font-semibold">Mẹ:</span> {f.me}</p>
                   </div>
                   <div className="w-full h-px bg-ink/20 mt-auto mb-3" style={{ marginTop: '12px' }} />
-                  <p className="text-sm md:text-base text-ink italic font-serif tracking-wide">{f.addr}</p>
+                  <p className="text-[12px] md:text-base text-ink italic font-serif tracking-wide">{f.addr}</p>
                 </motion.div>
               ))}
             </div>

@@ -137,8 +137,8 @@ export default function Countdown() {
             transition={{ duration: 1, delay: 0.5 }}
             className="mt-16 flex justify-center"
           >
-            <div className="relative w-16 h-16 opacity-30 select-none">
-              <span className="font-script text-4xl text-ink flex items-center justify-center">T&N</span>
+            <div className="relative w-16 h-16 opacity-30 select-none flex items-center justify-center">
+              <span className="font-script text-4xl text-ink w-full h-full flex items-center justify-center">T&N</span>
               <div className="absolute inset-0 border border-ink rounded-full rotate-45 scale-125" />
             </div>
           </motion.div>
@@ -236,10 +236,6 @@ export default function Countdown() {
           </motion.div>
         </div>
       </div>
-
-      {/* 4. Thank You Footer */}
-
-
     </section>
   );
 }

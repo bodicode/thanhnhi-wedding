@@ -15,7 +15,7 @@ export default function Hero() {
         <motion.div
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 2, ease: "easeOut" }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
           className="absolute inset-0"
         >
           <Image
@@ -30,22 +30,22 @@ export default function Hero() {
         </motion.div>
 
         {/* Text Overlay on Image */}
-        <div className="absolute inset-x-0 bottom-12 md:bottom-20 flex flex-col items-center justify-center text-white z-10">
+        <div className="absolute inset-x-0 bottom-12 md:bottom-20 flex flex-col items-center justify-center text-white z-10 px-6 w-full">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 1 }}
-            className="font-script text-6xl md:text-[10rem] mb-4 drop-shadow-lg"
+            transition={{ duration: 1, delay: 0.5 }}
+            className="font-script text-5xl md:text-[10rem] mb-4 drop-shadow-lg text-center w-full"
           >
             We get married!
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.5 }}
-            className="flex flex-col items-center"
+            transition={{ duration: 1, delay: 0.8 }}
+            className="flex flex-col items-center text-center w-full"
           >
-            <h1 className="font-serif text-2xl md:text-4xl tracking-[0.2em] font-medium uppercase drop-shadow-md">
+            <h1 className="font-serif text-xl md:text-4xl tracking-widest md:tracking-[0.2em] font-medium uppercase drop-shadow-md text-center w-full">
               QUÝ THANH & UYỂN NHI
             </h1>
             <div className="w-12 h-[1px] bg-white/60 mt-4 md:mt-6" />
@@ -54,28 +54,9 @@ export default function Hero() {
       </div>
 
       {/* Bottom Invitation Section */}
-      <div className="relative flex-1 bg-paper flex flex-col items-center justify-center py-12 px-6">
+      <div className="relative flex-1 bg-paper flex flex-col items-center justify-center py-4 px-6">
         {/* Texture Overlay */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22/%3E%3C/svg%3E')]" />
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 2 }}
-          className="flex flex-col items-center space-y-8 z-10"
-        >
-          {/* Invitation Text */}
-          <div className="text-center">
-            <p className="font-serif text-md md:text-lg text-ink/70 tracking-[0.4em] uppercase font-light">
-              THƯ MỜI THAM DỰ LỄ CƯỚI
-            </p>
-            <div className="mt-4 flex items-center justify-center space-x-4 opacity-30">
-              <div className="w-12 h-[0.5px] bg-ink" />
-              <div className="w-1 h-1 bg-ink rotate-45" />
-              <div className="w-12 h-[0.5px] bg-ink" />
-            </div>
-          </div>
-        </motion.div>
       </div>
 
       {/* Decorative Corner (Optional, adds to luxury feel) */}

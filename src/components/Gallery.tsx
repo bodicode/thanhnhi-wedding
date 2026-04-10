@@ -72,74 +72,58 @@ export default function Gallery() {
 
       <div className="max-w-5xl mx-auto px-4 flex flex-col items-center gap-4">
 
-        {/* Main image wrapper — relative for overlay buttons */}
-        <div className="relative w-full flex justify-center select-none">
-          <AnimatePresence mode="wait">
+        {/* Main image wrapper */}
+        <div className="relative w-full flex justify-center select-none overflow-hidden h-[50vh] md:h-[75vh]">
+          <AnimatePresence mode="popLayout">
             <motion.div
               key={activeIndex}
-              className="cursor-zoom-in rounded-sm overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.15)]"
+              className="cursor-zoom-in rounded-sm overflow-hidden shadow-2xl w-full h-full flex items-center justify-center"
               onClick={() => setShowLightbox(true)}
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.15}
               onDragEnd={handleDragEnd}
             >
-              {/* Plain img — browser respects natural ratio, no cropping */}
               <Image
                 src={src}
                 alt={IMAGE_NAMES[activeIndex]}
-                width={1200}
-                height={1600}
-                style={{
-                  maxHeight: '75vh',
-                  maxWidth: '100%',
-                  width: 'auto',
-                  height: 'auto',
-                }}
-                className="block"
+                width={1600}
+                height={2000}
+                className="w-full h-full object-contain"
                 priority
                 sizes="(max-width: 768px) 100vw, 80vw"
-                quality={85}
+                quality={80}
               />
             </motion.div>
           </AnimatePresence>
 
-          {/* Prev / Next — outside AnimatePresence so they don't flicker */}
+          {/* Navigation Buttons */}
           <button
             onClick={() => goTo(activeIndex - 1)}
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/70 backdrop-blur-sm flex items-center justify-center text-ink hover:bg-white transition-colors shadow-md"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/70 backdrop-blur-sm flex items-center justify-center text-ink hover:bg-white transition-colors shadow-md"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />
             </svg>
           </button>
           <button
             onClick={() => goTo(activeIndex + 1)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/70 backdrop-blur-sm flex items-center justify-center text-ink hover:bg-white transition-colors shadow-md"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/70 backdrop-blur-sm flex items-center justify-center text-ink hover:bg-white transition-colors shadow-md"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="9 18 15 12 9 6" />
             </svg>
           </button>
 
-          {/* Counter */}
-          <div className="absolute bottom-3 right-6 z-10 font-serif text-xs text-white/90 tracking-widest bg-black/25 backdrop-blur-sm px-2 py-1 rounded-full">
-            {activeIndex + 1} / {IMAGE_NAMES.length}
-          </div>
-
-          {/* Hidden preloader for next image (safety for performance) */}
+          {/* Aggressive high-res preloader */}
           <div className="hidden" aria-hidden="true">
-            <Image
-              src={`/gallery/${IMAGE_NAMES[(activeIndex + 1) % IMAGE_NAMES.length]}`}
-              alt=""
-              width={10}
-              height={10}
-              priority
-            />
+            <Image src={`/gallery/${IMAGE_NAMES[(activeIndex - 1 + IMAGE_NAMES.length) % IMAGE_NAMES.length]}`} alt="" width={1600} height={2000} quality={80} priority />
+            <Image src={`/gallery/${IMAGE_NAMES[(activeIndex + 1) % IMAGE_NAMES.length]}`} alt="" width={1600} height={2000} quality={80} priority />
+            <Image src={`/gallery/${IMAGE_NAMES[(activeIndex + 2) % IMAGE_NAMES.length]}`} alt="" width={1600} height={2000} quality={80} />
           </div>
         </div>
 
@@ -165,8 +149,8 @@ export default function Gallery() {
               <Image
                 src={`/gallery/${name}`}
                 alt={name}
-                width={72}
-                height={54}
+                width={100}
+                height={75}
                 className="w-full h-full object-cover"
                 quality={50}
               />
@@ -183,11 +167,12 @@ export default function Gallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 backdrop-blur-md p-4 md:p-10"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 backdrop-blur-md"
             onClick={() => setShowLightbox(false)}
           >
+            {/* Close Button */}
             <motion.button
-              className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors z-[110]"
+              className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors z-[120] p-2"
               whileHover={{ scale: 1.1, rotate: 90 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setShowLightbox(false)}
@@ -199,42 +184,53 @@ export default function Gallery() {
             </motion.button>
 
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative max-w-7xl max-h-full flex items-center justify-center p-2 bg-white/5 rounded-sm shadow-2xl border border-white/10"
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ type: 'spring', damping: 30, stiffness: 400 }}
+              className="relative w-full h-full flex items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
-              <Image
-                src={src}
-                alt={IMAGE_NAMES[activeIndex]}
-                width={1600}
-                height={2000}
-                className="max-w-full max-h-[85vh] md:max-h-[90vh] object-contain rounded-sm"
-                quality={100}
-                priority
-              />
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="w-full h-full flex items-center justify-center p-0"
+                >
+                  <Image
+                    src={src}
+                    alt={IMAGE_NAMES[activeIndex]}
+                    width={1600}
+                    height={2000}
+                    className="w-full h-full object-contain"
+                    quality={80}
+                    priority
+                  />
+                </motion.div>
+              </AnimatePresence>
               
-              {/* Navigation within Lightbox */}
+              {/* Internal Navigation Buttons */}
               <button
                 onClick={(e) => { e.stopPropagation(); goTo(activeIndex - 1); }}
-                className="absolute -left-4 md:-left-16 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+                className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/50 hover:text-white transition-colors z-[110] bg-black/10 backdrop-blur-sm rounded-full"
               >
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="15 18 9 12 15 6" />
                 </svg>
               </button>
               <button
                 onClick={(e) => { e.stopPropagation(); goTo(activeIndex + 1); }}
-                className="absolute -right-4 md:-right-16 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/50 hover:text-white transition-colors z-[110] bg-black/10 backdrop-blur-sm rounded-full"
               >
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="9 18 15 12 9 6" />
                 </svg>
               </button>
 
-              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-white/40 font-serif text-sm tracking-widest">
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/60 font-serif text-sm tracking-widest bg-black/20 backdrop-blur-md px-6 py-1.5 rounded-full z-[110]">
                 {activeIndex + 1} / {IMAGE_NAMES.length}
               </div>
             </motion.div>

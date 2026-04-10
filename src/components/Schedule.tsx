@@ -43,62 +43,64 @@ export default function Schedule() {
             </div>
 
             {/* Events column */}
-            <div className="flex-1 relative flex flex-col justify-between py-2">
+            <div className="flex-1 flex flex-col py-2">
 
-              {/* Vertical line */}
-              <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px" style={{ background: COLOR_LINE }} />
-
-              {/* "Timeline" mobile — inside flow, above first event */}
-              <div className="md:hidden flex justify-center mb-4">
+              {/* "Timeline" mobile — nằm ngoài vùng đường dọc */}
+              <div className="md:hidden flex justify-center mb-6">
                 <span className="font-script leading-none" style={{ fontSize: '2.8rem', color: COLOR_TIME, textShadow: '0 2px 12px rgba(255,255,255,0.9)' }}>
                   Timeline
                 </span>
               </div>
 
-              {events.map((item, i) => (
-                <div key={i} className="grid grid-cols-[1fr_28px_1fr] items-center w-full">
+              {/* Events với đường dọc chỉ bao quanh events */}
+              <div className="flex-1 relative flex flex-col justify-between">
+                <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px" style={{ background: COLOR_LINE }} />
 
-                  {/* Left */}
-                  <div className="pr-3 md:pr-6 text-right">
-                    {item.timeLeft ? (
-                      <p className="font-serif font-semibold leading-none"
-                        style={{ fontSize: 'clamp(1.1rem, 2.5vw, 2.2rem)', color: COLOR_TIME }}>
-                        {item.time}
-                      </p>
-                    ) : (
-                      <>
-                        <p className="font-serif font-medium"
-                          style={{ fontSize: 'clamp(0.8rem, 1.6vw, 1.3rem)', color: COLOR_LABEL }}>{item.label}</p>
-                        <p className="font-serif italic"
-                          style={{ fontSize: 'clamp(0.6rem, 1vw, 0.82rem)', color: COLOR_SUB }}>{item.sub}</p>
-                      </>
-                    )}
+                {events.map((item, i) => (
+                  <div key={i} className="grid grid-cols-[1fr_28px_1fr] items-center w-full">
+
+                    {/* Left */}
+                    <div className="pr-3 md:pr-6 text-right">
+                      {item.timeLeft ? (
+                        <p className="font-serif font-semibold leading-none"
+                          style={{ fontSize: 'clamp(1.1rem, 2.5vw, 2.2rem)', color: COLOR_TIME }}>
+                          {item.time}
+                        </p>
+                      ) : (
+                        <>
+                          <p className="font-serif font-medium"
+                            style={{ fontSize: 'clamp(0.8rem, 1.6vw, 1.3rem)', color: COLOR_LABEL }}>{item.label}</p>
+                          <p className="font-serif italic"
+                            style={{ fontSize: 'clamp(0.6rem, 1vw, 0.82rem)', color: COLOR_SUB }}>{item.sub}</p>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Dot */}
+                    <div className="relative z-10 flex items-center justify-center">
+                      <div className="w-2.5 h-2.5 rounded-full bg-white/90" style={{ border: `1px solid ${COLOR_LINE}` }} />
+                    </div>
+
+                    {/* Right */}
+                    <div className="pl-3 md:pl-6 text-left">
+                      {item.timeLeft ? (
+                        <>
+                          <p className="font-serif font-medium"
+                            style={{ fontSize: 'clamp(0.8rem, 1.6vw, 1.3rem)', color: COLOR_LABEL }}>{item.label}</p>
+                          <p className="font-serif italic"
+                            style={{ fontSize: 'clamp(0.6rem, 1vw, 0.82rem)', color: COLOR_SUB }}>{item.sub}</p>
+                        </>
+                      ) : (
+                        <p className="font-serif font-semibold leading-none"
+                          style={{ fontSize: 'clamp(1.1rem, 2.5vw, 2.2rem)', color: COLOR_TIME }}>
+                          {item.time}
+                        </p>
+                      )}
+                    </div>
+
                   </div>
-
-                  {/* Dot */}
-                  <div className="relative z-10 flex items-center justify-center">
-                    <div className="w-2.5 h-2.5 rounded-full bg-white/90" style={{ border: `1px solid ${COLOR_LINE}` }} />
-                  </div>
-
-                  {/* Right */}
-                  <div className="pl-3 md:pl-6 text-left">
-                    {item.timeLeft ? (
-                      <>
-                        <p className="font-serif font-medium"
-                          style={{ fontSize: 'clamp(0.8rem, 1.6vw, 1.3rem)', color: COLOR_LABEL }}>{item.label}</p>
-                        <p className="font-serif italic"
-                          style={{ fontSize: 'clamp(0.6rem, 1vw, 0.82rem)', color: COLOR_SUB }}>{item.sub}</p>
-                      </>
-                    ) : (
-                      <p className="font-serif font-semibold leading-none"
-                        style={{ fontSize: 'clamp(1.1rem, 2.5vw, 2.2rem)', color: COLOR_TIME }}>
-                        {item.time}
-                      </p>
-                    )}
-                  </div>
-
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
           </div>

@@ -18,12 +18,12 @@ export default function Invitation() {
         className="flex flex-col items-center relative w-full z-10"
       >
         {/* HEADER TITLE (Inspired by Photo 1) */}
-        <div className="flex flex-col items-center mb-16 md:mb-24">
-          <h2 className="text-xl md:text-3xl tracking-[0.5em] uppercase text-ink/70 font-serif font-bold mb-8">
+        <div className="flex flex-col items-center mb-16">
+          <h2 className="text-xl md:text-3xl tracking-[0.15em] uppercase text-ink/70 font-serif font-bold mb-4">
             Thư Mời Tham Dự Lễ Cưới
           </h2>
-          <div className="w-px h-16 bg-gold-accent opacity-40 mb-10" />
-          <p className="text-sm md:text-xl tracking-[0.1em] text-ink font-serif italic opacity-90 max-w-md leading-relaxed">
+          <div className="w-px h-8 bg-gold-accent opacity-40 mb-4" />
+          <p className="text-base md:text-xl tracking-[0.1em] text-ink font-serif italic max-w-md leading-relaxed">
             Trân trọng kính mời đến tham dự lễ cưới của
           </p>
         </div>
@@ -36,7 +36,7 @@ export default function Invitation() {
             <div className="text-center">
               <span className="font-script text-3xl md:text-6xl text-ink leading-none block mb-2 md:mb-4">Chú rể</span>
               <h1 className="font-serif text-lg md:text-7xl text-ink font-bold tracking-wider uppercase mb-1 md:mb-2 leading-tight">Quý Thanh</h1>
-              <p className="text-[10px] md:text-sm tracking-[0.3em] uppercase text-ink-light font-semibold">Út Nam</p>
+              <p className="text-xs md:text-sm tracking-[0.3em] uppercase text-ink font-semibold">Út Nam</p>
             </div>
 
             <div className="w-full aspect-[3/4] relative overflow-hidden bg-stone-100 shadow-[10px_10px_30px_rgba(0,0,0,0.05)] md:shadow-[20px_20px_60px_rgba(0,0,0,0.05)] border-4 md:border-8 border-white ring-1 ring-black/5">
@@ -59,7 +59,7 @@ export default function Invitation() {
             <div className="text-center">
               <span className="font-script text-3xl md:text-6xl text-ink leading-none block mb-2 md:mb-4">Cô dâu</span>
               <h1 className="font-serif text-lg md:text-7xl text-ink font-bold tracking-wider uppercase mb-1 md:mb-2 leading-tight">Uyển Nhi</h1>
-              <p className="text-[10px] md:text-sm tracking-[0.3em] uppercase text-ink-light font-semibold">Trưởng Nữ</p>
+              <p className="text-xs md:text-sm tracking-[0.3em] uppercase text-ink font-semibold">Trưởng Nữ</p>
             </div>
 
             <div className="w-full aspect-[3/4] relative overflow-hidden bg-stone-100 shadow-[10px_10px_30px_rgba(0,0,0,0.05)] md:shadow-[20px_20px_60px_rgba(0,0,0,0.05)] border-4 md:border-8 border-white ring-1 ring-black/5">
@@ -99,36 +99,40 @@ export default function Invitation() {
           {/* Right side: Quote + Parents */}
           <div className="flex flex-col flex-1 gap-8">
             {/* Quote */}
-            <p className="font-serif text-sm md:text-base text-ink/80 leading-relaxed italic text-center md:text-left">
+            <p className="font-serif text-base md:text-lg text-ink/90 leading-relaxed italic text-center md:text-left">
               Chúng tôi vô cùng hân hạnh khi được đón tiếp quý vị trong ngày trọng đại của mình. Sự hiện diện cùng những lời chúc tốt đẹp của quý vị chính là niềm vinh hạnh và là món quà ý nghĩa, góp phần làm nên những khoảnh khắc trọn vẹn, đáng nhớ. Chúng tôi xin gửi lời cảm ơn chân thành và sâu sắc nhất!
             </p>
 
             {/* Parents */}
             <div className="pt-6 border-t border-ink-light/20">
-              <div className="grid grid-cols-2 gap-6 md:gap-10">
+              <div className="grid grid-cols-2 gap-6 md:gap-10 items-stretch">
                 {/* Nhà Trai */}
                 <div className="flex flex-col items-start text-left">
-                  <p className="font-serif font-bold text-sm md:text-base tracking-widest uppercase text-ink mb-3">Nhà Trai</p>
-                  <p className="text-xs md:text-sm text-ink/80 font-serif uppercase tracking-wide leading-relaxed">
-                    <span className="font-semibold">Bố:</span> Phùng Văn Thanh
-                  </p>
-                  <p className="text-xs md:text-sm text-ink/80 font-serif uppercase tracking-wide leading-relaxed mb-3">
-                    <span className="font-semibold">Mẹ:</span> Phan Thị Thanh
-                  </p>
-                  <div className="w-full h-px bg-ink/20 mb-3" />
-                  <p className="text-xs text-ink-light italic font-serif tracking-wide">P. Trấn Biên, T. Đồng Nai</p>
+                  <div className='h-[100px]'>
+                    <p className="font-serif font-bold text-lg md:text-base tracking-widest uppercase text-ink mb-3 text-center">Nhà Trai</p>
+                    <p className="text-sm md:text-lg text-ink font-serif tracking-wide leading-relaxed">
+                      <span className="font-semibold">Bố:</span> Phùng Văn Thanh
+                    </p>
+                    <p className="text-sm md:text-lg text-ink font-serif tracking-wide leading-relaxed">
+                      <span className="font-semibold">Mẹ:</span> Phan Thị Thanh
+                    </p>
+                  </div>
+                  <div className="w-full h-px bg-ink/20 mt-auto mb-3" style={{ marginTop: '12px' }} />
+                  <p className="text-sm md:text-base text-ink italic font-serif tracking-wide">P. Trấn Biên, T. Đồng Nai</p>
                 </div>
                 {/* Nhà Gái */}
                 <div className="flex flex-col items-start text-left">
-                  <p className="font-serif font-bold text-sm md:text-base tracking-widest uppercase text-ink mb-3">Nhà Gái</p>
-                  <p className="text-xs md:text-sm text-ink/80 font-serif uppercase tracking-wide leading-relaxed">
-                    <span className="font-semibold">Bố:</span> Đinh Nguyễn Thị Ngân
-                  </p>
-                  <p className="text-xs md:text-sm text-ink/80 font-serif uppercase tracking-wide leading-relaxed mb-3">
-                    <span className="font-semibold">Mẹ:</span> Hoàng Thị Thu Hiền
-                  </p>
-                  <div className="w-full h-px bg-ink/20 mb-3" />
-                  <p className="text-xs text-ink-light italic font-serif tracking-wide">P. Tân Triều, T. Đồng Nai</p>
+                  <div className='h-[100px]'>
+                    <p className="font-serif font-bold text-lg md:text-base tracking-widest uppercase text-ink mb-3 text-center">Nhà Gái</p>
+                    <p className="text-sm md:text-lg text-ink font-serif tracking-wide leading-relaxed">
+                      <span className="font-semibold">Bố:</span> Đinh Nguyễn Thị Ngân
+                    </p>
+                    <p className="text-sm md:text-lg text-ink font-serif tracking-wide leading-relaxed">
+                      <span className="font-semibold">Mẹ:</span> Hoàng Thị Thu Hiền
+                    </p>
+                  </div>
+                  <div className="w-full h-px bg-ink/20 mt-auto mb-3" style={{ marginTop: '12px' }} />
+                  <p className="text-sm md:text-base text-ink italic font-serif tracking-wide">P. Tân Triều, T. Đồng Nai</p>
                 </div>
               </div>
             </div>
@@ -138,25 +142,25 @@ export default function Invitation() {
 
         {/* ── LỄ TÂN HÔN ── */}
         <div className="w-full max-w-5xl mx-auto mt-8 flex flex-col items-center text-center border-t border-ink-light/20 pt-12">
-          <span className="font-script text-6xl md:text-7xl text-ink mb-6">Lễ Tân Hôn</span>
-          <p className="text-sm md:text-base tracking-[0.2em] uppercase text-ink/70 font-serif mb-6">08:00, Chủ Nhật</p>
+          <span className="font-script text-4xl md:text-7xl text-ink mb-6">Lễ Tân Hôn</span>
+          <p className="text-sm md:text-base tracking-[0.2em] uppercase text-ink/80 font-serif mb-6">08:00, Chủ Nhật</p>
 
           {/* Date row */}
           <div className="flex items-center justify-center gap-6 md:gap-10 mb-3">
-            <span className="text-xs md:text-sm tracking-[0.25em] uppercase text-ink-light font-medium">Tháng 07</span>
+            <span className="text-sm md:text-base tracking-[0.25em] uppercase text-ink font-medium">Tháng 07</span>
             <div className="w-px h-8 bg-ink-light/30" />
             <span className="text-6xl md:text-8xl font-serif font-bold text-[#904C4C] leading-none">05</span>
             <div className="w-px h-8 bg-ink-light/30" />
-            <span className="text-xs md:text-sm tracking-[0.25em] uppercase text-ink-light font-medium">Năm 2026</span>
+            <span className="text-sm md:text-base tracking-[0.25em] uppercase text-ink font-medium">Năm 2026</span>
           </div>
-          <p className="text-xs text-ink-light italic mb-6">(Nhằm ngày 21 tháng 05 năm Bính Ngọ)</p>
+          <p className="text-sm text-ink/70 italic mb-6">(Nhằm ngày 21 tháng 05 năm Bính Ngọ)</p>
 
           {/* Location */}
           <div className="flex flex-col items-center mb-8">
             <svg className="w-5 h-5 text-[#904C4C] mb-2" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
             </svg>
-            <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-ink/70 font-serif">Được cử hành tại Tư Gia</p>
+            <p className="text-sm md:text-base tracking-[0.25em] uppercase text-ink font-serif">Được cử hành tại Tư Gia</p>
           </div>
 
           {/* Full-width couple photo */}
@@ -174,17 +178,17 @@ export default function Invitation() {
 
         {/* ── LỄ THÀNH HÔN ── */}
         <div className="w-full max-w-5xl mx-auto mt-16 flex flex-col items-center text-center">
-          <span className="font-script text-6xl md:text-7xl text-ink mb-6">Lễ Thành Hôn</span>
-          <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-ink-light mb-6">Nhà Trai</p>
+          <span className="font-script text-4xl md:text-7xl text-ink mb-6">Lễ Thành Hôn</span>
+          <p className="text-sm md:text-base tracking-[0.25em] uppercase text-ink/70 mb-6">Nhà Trai</p>
 
-          <p className="text-xs md:text-sm tracking-[0.2em] uppercase text-ink/70 font-serif mb-2">Được tổ chức tại</p>
+          <p className="text-sm md:text-base tracking-[0.2em] uppercase text-ink/80 font-serif mb-2">Được tổ chức tại</p>
           <div className="relative w-48 md:w-64 h-20 md:h-28 mb-2">
             <Image src="/logo-golden-palace.png" alt="Golden Palace" fill className="object-contain" sizes="256px" quality={75} />
           </div>
-          <p className="text-xs md:text-sm tracking-[0.15em] uppercase text-ink/60 font-serif mb-8">(Sảnh King Room)</p>
+          <p className="text-sm md:text-base tracking-[0.15em] uppercase text-ink/70 font-serif mb-8">(Sảnh King Room)</p>
 
           {/* Time row */}
-          <p className="text-xs tracking-[0.25em] uppercase text-ink-light mb-3">Vào Lúc</p>
+          <p className="text-sm tracking-[0.25em] uppercase text-ink/70 mb-3">Vào Lúc</p>
           <div className="flex items-center justify-center gap-4 md:gap-8 mb-3">
             <span className="font-serif font-bold text-4xl md:text-6xl text-ink">10:30</span>
             <div className="w-px h-10 bg-ink-light/40" />
@@ -192,7 +196,7 @@ export default function Invitation() {
             <div className="w-px h-10 bg-ink-light/40" />
             <span className="font-serif font-bold text-xl md:text-3xl tracking-widest uppercase text-ink">Chủ<br />Nhật</span>
           </div>
-          <p className="text-xs text-ink-light italic mb-10">(Nhằm ngày 21 tháng 05 năm Bính Ngọ)</p>
+          <p className="text-sm text-ink/70 italic mb-10">(Nhằm ngày 21 tháng 05 năm Bính Ngọ)</p>
 
           {/* Map + Address */}
           <div className="flex flex-col items-center mb-4 w-full">
@@ -200,7 +204,7 @@ export default function Invitation() {
               <svg className="w-6 h-6 text-[#904C4C] mb-1" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
               </svg>
-              <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-ink/70 font-serif font-semibold">Địa Điểm</p>
+              <p className="text-sm md:text-base tracking-[0.25em] uppercase text-ink font-serif font-semibold">Địa Điểm</p>
             </div>
             <div className="w-full max-w-2xl aspect-[16/9] relative overflow-hidden rounded shadow-md mb-4">
               <iframe
@@ -212,7 +216,7 @@ export default function Invitation() {
                 title="Golden Palace location"
               />
             </div>
-            <p className="text-xs md:text-sm tracking-[0.15em] uppercase text-ink/80 font-serif font-semibold">04-06 Nguyễn Ái Quốc, P. Tam Hiệp, T. Đồng Nai</p>
+            <p className="text-sm md:text-base tracking-[0.15em] uppercase text-ink font-serif font-semibold">04-06 Nguyễn Ái Quốc, P. Tam Hiệp, T. Đồng Nai</p>
           </div>
 
           {/* Timeline */}

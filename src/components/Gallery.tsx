@@ -1,240 +1,146 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { supabase } from '@/utils/supabase/client';
-import Image from 'next/image';
+import { useEffect, useState, useRef, useCallback } from 'react';
+
+const IMAGE_NAMES = Array.from({ length: 30 }, (_, i) => `${i + 1}.jpg`);
 
 export default function Gallery() {
-  const [images, setImages] = useState<{ src: string, alt: string }[]>([]);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const thumbsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    async function loadImagesFromStorage() {
-      const { data, error } = await supabase
-        .storage
-        .from('wedding-images')
-        .list('', {
-          limit: 100,
-          sortBy: { column: 'created_at', order: 'asc' },
-        });
-
-      if (error) {
-        console.error('Không thể lấy danh sách ảnh từ Supabase:', error);
-        return;
-      }
-
-      if (data) {
-        const validFiles = data.filter(file => file.id && !file.name.startsWith('.'));
-        const imageUrls = validFiles.map((file) => {
-          const { data: publicUrlData } = supabase
-            .storage
-            .from('wedding-images')
-            .getPublicUrl(file.name);
-          return {
-            src: publicUrlData.publicUrl,
-            alt: file.name
-          };
-        });
-        setImages(imageUrls);
-      }
-    }
-    loadImagesFromStorage();
+  const goTo = useCallback((i: number) => {
+    setActiveIndex((i + IMAGE_NAMES.length) % IMAGE_NAMES.length);
   }, []);
 
-  // Keyboard navigation and body scroll lock
   useEffect(() => {
-    if (selectedIndex !== null) {
-      document.body.style.overflow = 'hidden';
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') setSelectedIndex(null);
-        if (e.key === 'ArrowRight') handleNext();
-        if (e.key === 'ArrowLeft') handlePrev();
-      };
-      window.addEventListener('keydown', handleKeyDown);
-      return () => {
-        document.body.style.overflow = '';
-        window.removeEventListener('keydown', handleKeyDown);
-      };
+    if (!thumbsRef.current) return;
+    const container = thumbsRef.current;
+    const thumb = container.children[activeIndex] as HTMLElement;
+    if (thumb) {
+      const scrollLeft = thumb.offsetLeft - container.offsetWidth / 2 + thumb.offsetWidth / 2;
+      container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
     }
-  }, [selectedIndex]);
+  }, [activeIndex]);
 
-  const handleNext = () => {
-    setSelectedIndex((prev) => (prev !== null ? (prev + 1) % images.length : null));
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') goTo(activeIndex + 1);
+      if (e.key === 'ArrowLeft') goTo(activeIndex - 1);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [activeIndex, goTo]);
+
+  const handleDragEnd = (_: unknown, info: { offset: { x: number } }) => {
+    if (info.offset.x < -50) goTo(activeIndex + 1);
+    else if (info.offset.x > 50) goTo(activeIndex - 1);
   };
 
-  const handlePrev = () => {
-    setSelectedIndex((prev) => (prev !== null ? (prev - 1 + images.length) % images.length : null));
-  };
-
-  if (images.length === 0) return null;
-
-  // Split images into two rows for the double sliding marquee effect
-  const half = Math.max(1, Math.ceil(images.length / 2));
-  const row1 = images.slice(0, half);
-  const row2 = images.slice(half).length > 0 ? images.slice(half) : row1;
-
-  // Helper to multiply an array until it has enough items to fill the screen width smoothly
-  const fillArray = (arr: typeof images) => {
-    let result = [...arr];
-    while (result.length < 8) {
-      result = [...result, ...arr];
-    }
-    return result;
-  };
-
-  const createMarquee = (row: typeof images, direction: "left" | "right", speedFactor: number, startIndexOffset: number) => {
-    const base = fillArray(row);
-    // Duplicate the base array for seamless loop
-    const duplicated = [...base, ...base];
-    const duration = base.length * speedFactor;
-
-    return (
-      <div className="w-full flex overflow-hidden py-4 md:py-6 relative -mx-4 md:mx-0">
-        <div 
-          className={`flex flex-nowrap w-max pause-on-hover ${direction === "left" ? "animate-marquee-left" : "animate-marquee-right"}`}
-          style={{ 
-            animationDuration: `${duration}s`,
-            willChange: "transform"
-          }}
-        >
-          {duplicated.map((img, i) => {
-            const rotationClass = i % 3 === 0 ? '-rotate-2' : i % 2 === 0 ? 'rotate-2' : '-rotate-1';
-            // Determine the original index in the 'images' array for the lightbox
-            const originalIndex = startIndexOffset + (i % row.length);
-            
-            return (
-              <div 
-                key={i} 
-                className="px-3 md:px-5 w-[240px] md:w-[380px] shrink-0 hover:z-20 cursor-zoom-in"
-                onClick={() => setSelectedIndex(originalIndex)}
-              >
-                <div className={`aspect-[3/4] p-2 md:p-3 shadow-[2px_6px_15px_rgba(0,0,0,0.05)] bg-[#FDFCF9] border border-black/5 ${rotationClass} hover:rotate-0 hover:scale-105 transition-all duration-500 relative group overflow-hidden`}>
-                  <div className="relative w-full h-full bg-paper-muted border border-ink-light/10 overflow-hidden">
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      width={300}
-                      height={400}
-                      sizes="(max-width: 768px) 240px, 380px"
-                      className="w-full h-full object-cover transition-transform duration-[10s] ease-out group-hover:scale-110"
-                      quality={70}
-                      loading={i < 4 ? "eager" : "lazy"}
-                      priority={i < 4}
-                    />
-                    <div className="absolute inset-0 shadow-[inset_0_0_10px_rgba(0,0,0,0.05)] pointer-events-none" />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  };
+  const src = `/gallery/${IMAGE_NAMES[activeIndex]}`;
 
   return (
-    <section className="relative py-24 bg-paper border-b border-ink-light/20 overflow-hidden flex flex-col items-center">
+    <section className="relative py-20 bg-paper overflow-hidden">
 
+      {/* Header */}
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1.5 }}
-        className="w-full flex flex-col gap-0 md:gap-4"
+        className="flex flex-col items-center mb-10 px-4"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
       >
-        {createMarquee(row1, "left", 6, 0)}
-        {createMarquee(row2, "right", 7, half)}
+        <div className="flex items-center gap-4 mb-10">
+          <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-gold-accent" />
+          <span className="text-gold-accent text-xs">✦</span>
+          <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-gold-accent" />
+        </div>
+        <p className="font-script text-4xl md:text-5xl text-ink">Album Ảnh Cưới</p>
       </motion.div>
 
-      {/* Lightbox Modal */}
-      <AnimatePresence>
-        {selectedIndex !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-100 flex items-center justify-center bg-paper/95 backdrop-blur-md px-4 md:px-20"
-            onClick={() => setSelectedIndex(null)}
-          >
-            {/* Close Button */}
-            <button 
-              className="absolute top-8 right-8 text-ink hover:text-gold-accent transition-colors z-110"
-              onClick={(e) => { e.stopPropagation(); setSelectedIndex(null); }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
+      <div className="max-w-5xl mx-auto px-4 flex flex-col items-center gap-4">
 
-            {/* Navigation Buttons */}
-            <button 
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-ink/40 hover:text-ink transition-colors z-110 bg-white/20 p-2 rounded-full backdrop-blur-sm"
-              onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+        {/* Main image wrapper — relative for overlay buttons */}
+        <div className="relative w-full flex justify-center select-none">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              className="cursor-grab active:cursor-grabbing rounded-sm overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.15)]"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.15}
+              onDragEnd={handleDragEnd}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            </button>
-
-            <button 
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-ink/40 hover:text-ink transition-colors z-110 bg-white/20 p-2 rounded-full backdrop-blur-sm"
-              onClick={(e) => { e.stopPropagation(); handleNext(); }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-
-            {/* Image Display */}
-            <motion.div 
-              key={selectedIndex}
-              initial={{ opacity: 0, scale: 0.9, x: 20 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              exit={{ opacity: 0, scale: 0.9, x: -20 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full h-[70vh] md:h-[85vh] flex items-center justify-center overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image 
-                src={images[selectedIndex].src}
-                alt={images[selectedIndex].alt}
-                fill
-                className="object-contain"
-                sizes="(max-width: 1280px) 100vw, 1280px"
-                priority
-                quality={75}
-                placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Wg8AAm8BlGz/g1gAAAAASUVORK5CYII="
+              {/* Plain img — browser respects natural ratio, no cropping */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt={IMAGE_NAMES[activeIndex]}
+                className="block pointer-events-none"
+                style={{ maxHeight: '75vh', maxWidth: '100%', width: 'auto', height: 'auto' }}
               />
             </motion.div>
+          </AnimatePresence>
 
-            {/* Pre-fetching next/prev images for instant transitions */}
-            <div className="hidden">
-              <Image 
-                src={images[(selectedIndex + 1) % images.length].src}
-                alt="prefetch-next"
-                width={1}
-                height={1}
-                priority
-              />
-              <Image 
-                src={images[(selectedIndex - 1 + images.length) % images.length].src}
-                alt="prefetch-prev"
-                width={1}
-                height={1}
-                priority
-              />
-            </div>
+          {/* Prev / Next — outside AnimatePresence so they don't flicker */}
+          <button
+            onClick={() => goTo(activeIndex - 1)}
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/70 backdrop-blur-sm flex items-center justify-center text-ink hover:bg-white transition-colors shadow-md"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+          <button
+            onClick={() => goTo(activeIndex + 1)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/70 backdrop-blur-sm flex items-center justify-center text-ink hover:bg-white transition-colors shadow-md"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
 
-            {/* Pagination Indicator */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 font-serif italic text-ink/60 tracking-widest uppercase text-sm">
-              {selectedIndex + 1} / {images.length}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          {/* Counter */}
+          <div className="absolute bottom-3 right-6 z-10 font-serif text-xs text-white/90 tracking-widest bg-black/25 backdrop-blur-sm px-2 py-1 rounded-full">
+            {activeIndex + 1} / {IMAGE_NAMES.length}
+          </div>
+        </div>
+
+        {/* Thumbnail strip */}
+        <div
+          ref={thumbsRef}
+          className="flex gap-2 w-full overflow-x-auto pb-1 scroll-smooth"
+          style={{ scrollbarWidth: 'none' }}
+        >
+          {IMAGE_NAMES.map((name, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              className="flex-shrink-0 relative rounded-sm overflow-hidden transition-all duration-300 focus:outline-none"
+              style={{
+                width: 72,
+                height: 54,
+                opacity: i === activeIndex ? 1 : 0.55,
+                transform: i === activeIndex ? 'scale(1.05)' : 'scale(1)',
+                boxShadow: i === activeIndex ? '0 0 0 2px #C3AC8F' : 'none',
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/gallery/${name}`}
+                alt={name}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </button>
+          ))}
+        </div>
+
+      </div>
     </section>
   );
 }

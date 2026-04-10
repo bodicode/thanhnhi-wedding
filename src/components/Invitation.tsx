@@ -96,7 +96,7 @@ export default function Invitation() {
                   initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
                   transition={{ duration: 0.9, delay: 0.5 + i * 0.15 }}
                 >
-                  <div className="h-[80px]">
+                  <div className="h-[80px] md:h-[100px]">
                     <p className="font-serif font-bold text-md md:text-base tracking-widest uppercase text-ink mb-3">{f.title}</p>
                     <p className="text-[12px] md:text-xl text-ink font-serif tracking-wide leading-relaxed"><span className="font-semibold">Bố:</span> {f.bo}</p>
                     <p className="text-[12px] md:text-xl text-ink font-serif tracking-wide leading-relaxed"><span className="font-semibold">Mẹ:</span> {f.me}</p>

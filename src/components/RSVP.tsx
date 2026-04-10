@@ -30,7 +30,7 @@ export default function RSVP() {
   };
 
   return (
-    <section className="relative bg-paper flex justify-center w-full">
+    <section className="relative bg-paper flex justify-center w-full py-4">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -44,8 +44,8 @@ export default function Invitation() {
               transition={{ duration: 1.2, delay: 0.2 + i * 0.15 }}
             >
               <div className="text-center">
-                <span className="font-script text-3xl md:text-6xl text-ink leading-none block mb-2 md:mb-4">{p.role}</span>
-                <h1 className="font-serif text-lg md:text-7xl text-ink font-bold tracking-wider uppercase mb-1 md:mb-2 leading-tight">{p.name}</h1>
+                <span className="font-script text-4xl md:text-6xl text-ink leading-none block mb-2 md:mb-4">{p.role}</span>
+                <h1 className="font-serif text-xl md:text-7xl text-ink font-bold tracking-wider uppercase mb-1 md:mb-2 leading-tight">{p.name}</h1>
                 <p className="text-xs md:text-sm tracking-[0.3em] uppercase text-ink font-semibold">{p.sub}</p>
               </div>
               <div className="w-full aspect-[3/4] relative overflow-hidden bg-stone-100 shadow-[10px_10px_30px_rgba(0,0,0,0.05)] md:shadow-[20px_20px_60px_rgba(0,0,0,0.05)] border-4 md:border-8 border-white ring-1 ring-black/5">
@@ -81,7 +81,7 @@ export default function Invitation() {
 
           {/* Parents */}
           <motion.div
-            className="order-3 md:order-3 md:col-start-2 md:self-start md:pt-6 border-t border-ink-light/20"
+            className="order-3 md:order-3 md:col-start-2 md:self-start md:pt-6 md:border-t md:border-ink-light/20"
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
             transition={{ duration: 1, delay: 0.4 }}
           >
@@ -96,10 +96,10 @@ export default function Invitation() {
                   initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
                   transition={{ duration: 0.9, delay: 0.5 + i * 0.15 }}
                 >
-                  <div className="h-[100px]">
+                  <div className="h-[130px]">
                     <p className="font-serif font-bold text-lg md:text-base tracking-widest uppercase text-ink mb-3">{f.title}</p>
-                    <p className="text-lg md:text-xl text-ink font-serif tracking-wide leading-relaxed"><span className="font-semibold">Bố:</span> {f.bo}</p>
-                    <p className="text-lg md:text-xl text-ink font-serif tracking-wide leading-relaxed"><span className="font-semibold">Mẹ:</span> {f.me}</p>
+                    <p className="text-base md:text-xl text-ink font-serif tracking-wide leading-relaxed"><span className="font-semibold">Bố:</span> {f.bo}</p>
+                    <p className="text-base md:text-xl text-ink font-serif tracking-wide leading-relaxed"><span className="font-semibold">Mẹ:</span> {f.me}</p>
                   </div>
                   <div className="w-full h-px bg-ink/20 mt-auto mb-3" style={{ marginTop: '12px' }} />
                   <p className="text-sm md:text-base text-ink italic font-serif tracking-wide">{f.addr}</p>
@@ -111,11 +111,11 @@ export default function Invitation() {
 
         {/* Lễ Tân Hôn */}
         <motion.div
-          className="w-full max-w-5xl mx-auto mt-2 flex flex-col items-center text-center pt-12"
+          className="w-full max-w-5xl mx-auto lex flex-col items-center text-center"
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
           transition={{ duration: 1 }}
         >
-          <div className="flex items-center gap-4 mb-10">
+          <div className="flex items-center justify-center gap-4 mb-10">
             <motion.div className="h-[1px] bg-gradient-to-r from-transparent to-gold-accent" initial={{ width: 0 }} whileInView={{ width: 48 }} viewport={VP} transition={{ duration: 0.8 }} />
             <span className="text-gold-accent text-xs">✦</span>
             <motion.div className="h-[1px] bg-gradient-to-l from-transparent to-gold-accent" initial={{ width: 0 }} whileInView={{ width: 48 }} viewport={VP} transition={{ duration: 0.8 }} />

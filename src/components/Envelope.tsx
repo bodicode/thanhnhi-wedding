@@ -147,7 +147,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
             style={{ color: '#8C6A4A' }}>
             Thiệp Báo Hỷ
           </span>
-          <p className="font-script text-2xl md:text-4xl leading-relaxed"
+          <p className="font-script text-xl sm:text-2xl md:text-4xl leading-relaxed"
             style={{ color: '#5C3D2E' }}>
             Sự hiện diện của bạn là niềm vinh hạnh
           </p>
@@ -192,7 +192,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
 
             {/* Inner card — z-index 2 so flaps (z-index 3+) sit on top when closed */}
             <motion.div
-              className="absolute left-5 right-5 top-5 bottom-5 flex flex-col items-center justify-center rounded-sm pointer-events-none"
+              className="absolute left-3 right-3 sm:left-5 sm:right-5 top-3 bottom-3 sm:top-5 sm:bottom-5 flex flex-col items-center justify-center rounded-sm pointer-events-none"
               style={{
                 background: 'linear-gradient(135deg, #FFFDF8 0%, #FDF6E8 100%)',
                 border: '1px solid rgba(195,172,143,0.4)',
@@ -202,13 +202,15 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
               animate={{ y: isAnimating ? '-80%' : 0 }}
               transition={{ duration: 1.5, delay: 0.35, ease: [0.16, 1, 0.3, 1] as const }}
             >
-              <div className="absolute inset-3 rounded-sm pointer-events-none"
+              <div className="absolute inset-2 sm:inset-3 rounded-sm pointer-events-none"
                 style={{ border: '1px solid rgba(195,172,143,0.25)' }} />
-              <div className="absolute top-4 left-4 text-[10px] opacity-40" style={{ color: '#C3AC8F' }}>❀ ✦ ❀</div>
-              <div className="absolute bottom-4 right-4 text-[10px] opacity-40" style={{ color: '#C3AC8F' }}>❀ ✦ ❀</div>
-              <span className="font-script text-4xl sm:text-5xl" style={{ color: '#5C3D2E' }}>Quý Thanh &amp; Uyển Nhi</span>
-              <div className="mt-2 text-[9px] tracking-[0.3em] uppercase font-serif opacity-50" style={{ color: '#8C6A4A' }}>
-                Trân trọng kính mời
+              <div className="absolute top-2 left-2 sm:top-4 sm:left-4 text-[8px] sm:text-[10px] opacity-40" style={{ color: '#C3AC8F' }}>❀ ✦ ❀</div>
+              <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 text-[8px] sm:text-[10px] opacity-40" style={{ color: '#C3AC8F' }}>❀ ✦ ❀</div>
+              <div className="flex flex-col items-center px-4 text-center">
+                <span className="font-script text-2xl sm:text-4xl lg:text-5xl whitespace-nowrap" style={{ color: '#5C3D2E' }}>Quý Thanh &amp; Uyển Nhi</span>
+                <div className="mt-1 sm:mt-2 text-[8px] sm:text-[9px] tracking-[0.2em] sm:tracking-[0.3em] uppercase font-serif opacity-50" style={{ color: '#8C6A4A' }}>
+                  Trân trọng kính mời
+                </div>
               </div>
             </motion.div>
 

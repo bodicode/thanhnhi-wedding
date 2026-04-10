@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 function Petal({ index }: { index: number }) {
@@ -70,6 +70,14 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [hovered, setHovered] = useState(false);
 
+  useEffect(() => {
+    // Lock scroll when envelope is shown
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   const handleOpen = () => {
     if (isAnimating) return;
     setIsAnimating(true);
@@ -83,7 +91,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
+      className={`fixed inset-0 z-50 flex items-center justify-center overflow-hidden ${isAnimating ? 'pointer-events-none' : ''}`}
       style={{
         perspective: 1500,
         background: 'radial-gradient(ellipse at 50% 40%, #FFFDF8 0%, #F9F7F1 50%, #F2EFE9 100%)',
@@ -190,14 +198,14 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
             <div className="absolute inset-0"
               style={{ background: 'linear-gradient(160deg, #F5E4C4 0%, #EDD5A3 40%, #E4C88A 70%, #D4B070 100%)' }} />
 
-            {/* Inner card — z-index 2 so flaps (z-index 3+) sit on top when closed */}
+            {/* Inner card — Fixed zIndex so it stays behind the pocket flaps (zIndex 20) */}
             <motion.div
               className="absolute left-3 right-3 sm:left-5 sm:right-5 top-3 bottom-3 sm:top-5 sm:bottom-5 flex flex-col items-center justify-center rounded-sm pointer-events-none"
               style={{
                 background: 'linear-gradient(135deg, #FFFDF8 0%, #FDF6E8 100%)',
                 border: '1px solid rgba(195,172,143,0.4)',
                 boxShadow: '0 2px 12px rgba(100,60,20,0.1)',
-                zIndex: isAnimating ? 30 : 2,
+                zIndex: 10,
               }}
               animate={{ y: isAnimating ? '-80%' : 0 }}
               transition={{ duration: 1.5, delay: 0.35, ease: [0.16, 1, 0.3, 1] as const }}
@@ -213,9 +221,9 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
                 </div>
               </div>
             </motion.div>
-
-            {/* Envelope flaps — z-index 3+ so they cover card when closed */}
-            <div className="absolute inset-0" style={{ zIndex: 3 }}>
+            
+            {/* Envelope pocket flaps — z-index 20 (always in front of card) */}
+            <div className="absolute inset-0" style={{ zIndex: 20 }}>
               {/* Left flap */}
               <div className="absolute inset-0"
                 style={{
@@ -237,64 +245,65 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
                   background: 'linear-gradient(to top, #D4B070, #E4C88A)',
                   borderTop: '1px solid rgba(195,172,143,0.4)',
                 }} />
-              {/* Top flap - opens on click */}
-              <motion.div
-                className="absolute inset-0 origin-top z-10"
-                style={{
-                  clipPath: 'polygon(0 0, 100% 0, 50% 52%)',
-                  background: 'linear-gradient(to bottom, #F0DDB0, #E4C88A)',
-                  borderBottom: '1px solid rgba(195,172,143,0.4)',
-                }}
-                initial={{ rotateX: 0 }}
-                animate={{ rotateX: isAnimating ? -180 : 0 }}
-                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] as const }}
-              >
-                {/* Sheen on top flap */}
-                <div className="absolute inset-0"
-                  style={{ background: 'linear-gradient(160deg, rgba(255,255,255,0.25) 0%, transparent 60%)', clipPath: 'polygon(0 0, 100% 0, 50% 52%)' }} />
-              </motion.div>
-
-              {/* Wax Seal */}
-              <motion.div
-                className="absolute top-1/2 left-1/2 z-20"
-                style={{ translateX: '-50%', translateY: 'calc(-50% - 4%)' }}
-                animate={{
-                  opacity: isAnimating ? 0 : 1,
-                  scale: isAnimating ? 0 : [1, 1.05, 1],
-                }}
-                transition={isAnimating
-                  ? { duration: 0.5, ease: 'easeIn' }
-                  : { duration: 3, repeat: Infinity, ease: 'easeInOut' }
-                }
-              >
-                {/* Outer glow */}
-                <div className="absolute inset-0 rounded-full pointer-events-none"
-                  style={{ filter: 'blur(8px)', background: 'radial-gradient(circle, rgba(195,172,143,0.8) 0%, transparent 70%)', transform: 'scale(1.4)' }} />
-                {/* Seal body */}
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center relative"
-                  style={{
-                    background: 'radial-gradient(circle at 35% 35%, #7A5C3A, #3D2010)',
-                    boxShadow: 'inset 0 -3px 8px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.1), 0 6px 20px rgba(60,30,10,0.4)',
-                    border: '2px solid rgba(195,172,143,0.5)',
-                  }}>
-                  {/* Inner ring */}
-                  <div className="absolute inset-2 rounded-full"
-                    style={{ border: '1px solid rgba(195,172,143,0.3)', background: 'radial-gradient(circle at 40% 40%, rgba(255,255,255,0.08), transparent)' }} />
-                  {/* Monogram */}
-                  <span className="font-script text-3xl sm:text-4xl relative z-10 pt-1"
-                    style={{ color: '#E5DCC5', textShadow: '0 1px 3px rgba(0,0,0,0.8), 0 0 10px rgba(195,172,143,0.4)' }}>
-                    T&amp;N
-                  </span>
-                  {/* Shimmer highlight */}
-                  <div className="absolute top-2 left-3 w-4 h-2 rounded-full pointer-events-none"
-                    style={{ background: 'rgba(255,255,255,0.15)', filter: 'blur(2px)' }} />
-                </div>
-              </motion.div>
             </div>
+
+            {/* Top flap - z-index high when closed, low when open */}
+            <motion.div
+              className="absolute inset-0 origin-top"
+              style={{
+                clipPath: 'polygon(0 0, 100% 0, 50% 52%)',
+                background: 'linear-gradient(to bottom, #F0DDB0, #E4C88A)',
+                borderBottom: '1px solid rgba(195,172,143,0.4)',
+                zIndex: isAnimating ? 5 : 25,
+              }}
+              initial={{ rotateX: 0 }}
+              animate={{ rotateX: isAnimating ? -180 : 0 }}
+              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] as const }}
+            >
+              <div className="absolute inset-0"
+                style={{ background: 'linear-gradient(160deg, rgba(255,255,255,0.25) 0%, transparent 60%)', clipPath: 'polygon(0 0, 100% 0, 50% 52%)' }} />
+            </motion.div>
+
+            {/* Wax Seal — zIndex 30 (always on top until hidden by opening) */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 z-30"
+              style={{ translateX: '-50%', translateY: 'calc(-50% - 4%)' }}
+              animate={{
+                opacity: isAnimating ? 0 : 1,
+                scale: isAnimating ? 0 : [1, 1.05, 1],
+              }}
+              transition={isAnimating
+                ? { duration: 0.5, ease: 'easeIn' }
+                : { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+              }
+            >
+              {/* Outer glow */}
+              <div className="absolute inset-0 rounded-full pointer-events-none"
+                style={{ filter: 'blur(8px)', background: 'radial-gradient(circle, rgba(195,172,143,0.8) 0%, transparent 70%)', transform: 'scale(1.4)' }} />
+              {/* Seal body */}
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center relative"
+                style={{
+                  background: 'radial-gradient(circle at 35% 35%, #7A5C3A, #3D2010)',
+                  boxShadow: 'inset 0 -3px 8px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.1), 0 6px 20px rgba(60,30,10,0.4)',
+                  border: '2px solid rgba(195,172,143,0.5)',
+                }}>
+                {/* Inner ring */}
+                <div className="absolute inset-2 rounded-full"
+                  style={{ border: '1px solid rgba(195,172,143,0.3)', background: 'radial-gradient(circle at 40% 40%, rgba(255,255,255,0.08), transparent)' }} />
+                {/* Monogram */}
+                <span className="font-script text-3xl sm:text-4xl relative z-10 pt-1"
+                  style={{ color: '#E5DCC5', textShadow: '0 1px 3px rgba(0,0,0,0.8), 0 0 10px rgba(195,172,143,0.4)' }}>
+                  T&amp;N
+                </span>
+                {/* Shimmer highlight */}
+                <div className="absolute top-2 left-3 w-4 h-2 rounded-full pointer-events-none"
+                  style={{ background: 'rgba(255,255,255,0.15)', filter: 'blur(2px)' }} />
+              </div>
+            </motion.div>
 
             {/* Overall envelope sheen */}
             <div className="absolute inset-0 pointer-events-none rounded-sm"
-              style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(0,0,0,0.05) 100%)' }} />
+              style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(0,0,0,0.05) 100%)', zIndex: 40 }} />
           </div>
         </motion.div>
 

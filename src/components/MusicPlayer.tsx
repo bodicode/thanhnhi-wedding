@@ -8,11 +8,10 @@ export default function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
+    // Initialization: setup volume and attempt autoplay once
     if (audioRef.current) {
       audioRef.current.volume = 0.4;
-      // Tự động phát khi component được render (sau khi user đã tương tác click "Mở thiệp")
       const playPromise = audioRef.current.play();
-
       if (playPromise !== undefined) {
         playPromise
           .then(() => setIsPlaying(true))
@@ -24,14 +23,22 @@ export default function MusicPlayer() {
     }
   }, []);
 
+  useEffect(() => {
+    const handleToggle = () => toggleMusic();
+    window.addEventListener('toggle-wedding-music', handleToggle);
+    return () => window.removeEventListener('toggle-wedding-music', handleToggle);
+  }, [isPlaying]);
+
   const toggleMusic = () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        setIsPlaying(false);
       } else {
-        audioRef.current.play();
+        audioRef.current.play()
+          .then(() => setIsPlaying(true))
+          .catch(e => console.error("Play failed", e));
       }
-      setIsPlaying(!isPlaying);
     }
   };
 

@@ -30,7 +30,7 @@ export default function RSVP() {
   };
 
   return (
-    <section className="relative pb-16 px-4 bg-paper flex justify-center">
+    <section className="relative bg-paper flex justify-center w-full">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -54,7 +54,7 @@ export default function RSVP() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
-              className="w-full space-y-6 flex flex-col items-center px-4 py-12 border border-gold-accent/30 bg-[#FDFCF9] shadow-[0_4px_30px_rgba(0,0,0,0.02)] mt-8"
+              className="w-full space-y-6 flex flex-col items-center py-12 border border-gold-accent/30 bg-[#FDFCF9] shadow-[0_4px_30px_rgba(0,0,0,0.02)] mt-8"
             >
               <motion.span
                 className="text-4xl text-[#904C4C] font-serif"
@@ -83,7 +83,7 @@ export default function RSVP() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.6 }}
-              className="w-full space-y-10 flex flex-col items-center px-4 mt-8"
+              className="w-full space-y-10 flex flex-col items-center mt-8"
             >
               <motion.div
                 className="w-full"

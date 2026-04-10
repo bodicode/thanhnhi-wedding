@@ -5,19 +5,19 @@ import Image from 'next/image';
 
 export default function Schedule() {
   const events = [
-    { time: '10:30', label: 'Đón Khách', sub: 'Chụp hình lưu niệm cùng Cô Dâu Chú Rể', timeLeft: true  },
-    { time: '12:00', label: 'Làm Lễ',    sub: 'Nghi thức thành hôn chính thức',         timeLeft: false },
-    { time: '12:30', label: 'Khai Tiệc', sub: 'Dùng bữa trưa thân mật',                timeLeft: true  },
+    { time: '10:30', label: 'Đón Khách', sub: 'Chụp hình lưu niệm cùng Cô Dâu Chú Rể', timeLeft: true },
+    { time: '12:00', label: 'Làm Lễ', sub: 'Nghi thức thành hôn chính thức', timeLeft: false },
+    { time: '12:30', label: 'Khai Tiệc', sub: 'Dùng bữa trưa thân mật', timeLeft: true },
   ];
 
-  const COLOR_TIME  = '#5c3d20';
+  const COLOR_TIME = '#5c3d20';
   const COLOR_LABEL = '#6b4a2a';
-  const COLOR_SUB   = '#7a5c3a';
-  const COLOR_LINE  = 'rgba(160,128,96,0.5)';
+  const COLOR_SUB = '#7a5c3a';
+  const COLOR_LINE = 'rgba(160,128,96,0.5)';
 
   return (
     <section className="relative border-b border-ink-light/20">
-      <div className="w-full relative overflow-hidden" style={{ minHeight: '450px' }}>
+      <div className="w-full relative overflow-hidden" style={{ minHeight: '550px' }}>
 
         {/* Background */}
         <motion.div
@@ -32,7 +32,7 @@ export default function Schedule() {
         </motion.div>
 
         {/* Content */}
-        <div className="absolute inset-0 flex items-stretch py-10 px-4 md:px-14">
+        <div className="absolute inset-0 flex items-stretch py-10">
 
           {/* Timeline script desktop */}
           <motion.div

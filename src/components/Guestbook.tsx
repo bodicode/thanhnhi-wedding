@@ -37,7 +37,7 @@ export default function Guestbook() {
   const currentWishes = wishes.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
-    <section className="relative py-24 px-4 bg-[#FDFCF9] w-full flex flex-col items-center border-t border-ink-light/10">
+    <section className="relative py-24 bg-[#FDFCF9] w-full flex flex-col items-center border-t border-ink-light/10">
       <div className="max-w-3xl w-full flex flex-col items-center">
 
         <motion.div

@@ -7,7 +7,7 @@ const VP = { once: true, margin: '-80px' } as const;
 
 export default function Invitation() {
   return (
-    <section className="relative py-16 px-4 bg-paper max-w-6xl mx-auto text-center border-b border-ink-light/20 overflow-hidden">
+    <section className="relative py-16 bg-paper w-full text-center border-b border-ink-light/20 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none opacity-[0.02] bg-[radial-gradient(circle_at_center,_var(--color-ink)_0%,_transparent_70%)]" />
 
       <div className="flex flex-col items-center relative w-full z-10">

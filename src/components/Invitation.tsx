@@ -138,7 +138,7 @@ export default function Invitation() {
 
         {/* ── LỄ TÂN HÔN ── */}
         <div className="w-full max-w-5xl mx-auto mt-8 flex flex-col items-center text-center border-t border-ink-light/20 pt-12">
-          <h2 className="font-serif font-bold text-2xl md:text-4xl tracking-[0.3em] uppercase text-ink mb-3">Lễ Tân Hôn</h2>
+          <span className="font-script text-6xl md:text-7xl text-ink mb-6">Lễ Tân Hôn</span>
           <p className="text-sm md:text-base tracking-[0.2em] uppercase text-ink/70 font-serif mb-6">08:00, Chủ Nhật</p>
 
           {/* Date row */}
@@ -162,7 +162,7 @@ export default function Invitation() {
           {/* Full-width couple photo */}
           <div className="w-full aspect-[16/9] md:aspect-[21/9] relative overflow-hidden">
             <Image
-              src="/invite.jpg"
+              src="/letanhon.jpg"
               alt="Lễ Tân Hôn"
               fill
               className="object-cover object-center"
@@ -174,7 +174,7 @@ export default function Invitation() {
 
         {/* ── LỄ THÀNH HÔN ── */}
         <div className="w-full max-w-5xl mx-auto mt-16 flex flex-col items-center text-center">
-          <h2 className="font-serif font-bold text-2xl md:text-4xl tracking-[0.3em] uppercase text-ink mb-1">Lễ Thành Hôn</h2>
+          <span className="font-script text-6xl md:text-7xl text-ink mb-6">Lễ Thành Hôn</span>
           <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-ink-light mb-6">Nhà Trai</p>
 
           <p className="text-xs md:text-sm tracking-[0.2em] uppercase text-ink/70 font-serif mb-2">Được tổ chức tại</p>

@@ -27,7 +27,7 @@ export default function Schedule() {
 
           {/* Background */}
           <div className="absolute inset-0">
-            <Image src="/invite.jpg" alt="Timeline background" fill className="object-cover object-center scale-105" sizes="100vw" quality={75} />
+            <Image src="/timeline.jpg" alt="Timeline background" fill className="object-cover object-center scale-105" sizes="100vw" quality={75} />
             <div className="absolute inset-x-0" style={{ top: '8%', bottom: '8%', background: 'rgba(255,255,255,0.65)' }} />
           </div>
 

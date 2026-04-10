@@ -40,7 +40,7 @@ export default function NhaTrai() {
                 <p className="text-ink-light text-sm tracking-[0.3em] uppercase mb-12 font-light">
                   Trân Trọng Cảm Ơn
                 </p>
-                <p className="font-script text-5xl md:text-6xl text-ink leading-tight">
+                <p className="font-script text-4xl md:text-6xl text-ink leading-tight">
                   Quý Thanh <span className="text-gold-accent px-3">&</span> Uyển Nhi
                 </p>
               </div>

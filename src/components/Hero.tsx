@@ -34,8 +34,8 @@ export default function Hero() {
             <path d="M12 2L13.5 8.5L20 10L13.5 11.5L12 18L10.5 11.5L4 10L10.5 8.5L12 2Z" />
             <circle cx="12" cy="10" r="1" fill="currentColor" />
           </svg>
-          <div className="w-12 h-12 flex items-center justify-center border border-gold-accent/30 rounded-full bg-stone-50/50 shadow-sm relative">
-            <span className="font-script text-xl text-ink pt-1">T&N</span>
+          <div className="w-60 h-12 flex items-center justify-center border border-gold-accent/30 rounded-full bg-stone-50/50 shadow-sm relative">
+            <span className="font-script text-xl text-ink pt-1">Save The Date</span>
           </div>
         </motion.div>
 
@@ -46,9 +46,6 @@ export default function Hero() {
           transition={{ duration: 2, delay: 0.8 }}
           className="text-center"
         >
-          <span className="text-md tracking-[0.4em] uppercase text-ink-light font-medium block mb-8">
-            Lễ Thành Hôn
-          </span>
         </motion.div>
 
         {/* Main Names Component */}

@@ -7,7 +7,6 @@ import Hero from '@/components/Hero';
 import Invitation from '@/components/Invitation';
 import Schedule from '@/components/Schedule';
 import Gallery from '@/components/Gallery';
-import LocationMap from '@/components/LocationMap';
 import RSVP from '@/components/RSVP';
 import Guestbook from '@/components/Guestbook';
 import MusicPlayer from '@/components/MusicPlayer';
@@ -34,7 +33,6 @@ export default function Home() {
             <Invitation />
             <Schedule />
             <Gallery />
-            <LocationMap />
             <RSVP />
             <Guestbook />
 

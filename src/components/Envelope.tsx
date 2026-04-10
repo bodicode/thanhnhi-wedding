@@ -18,8 +18,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
 
   return (
     <motion.div 
-      // Deep elegant studio-light backdrop (muted stone with central soft light)
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#DED6D1]/90 backdrop-blur-xl px-4 overflow-hidden"
+      className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-xl overflow-hidden"
       style={{ 
         perspective: 1500,
         background: 'radial-gradient(circle at center, rgba(239,235,230,0.95) 0%, rgba(206,196,188,0.95) 100%)'
@@ -30,25 +29,25 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
       {/* Floating dust particles (extremely subtle) / Ambient light */}
       <div className="absolute inset-0 pointer-events-none opacity-20 bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%220.5%22/%3E%3C/svg%3E')] mix-blend-overlay" />
 
-      <div className="flex flex-col items-center z-10 w-full max-w-2xl relative">
+      <div className="flex flex-col items-center justify-between z-10 w-full max-w-2xl relative px-4 h-full py-6 md:py-10">
         
         {/* Ceremonial Text Above */}
         <motion.div 
-          className="flex flex-col items-center mb-10 md:mb-14 text-center"
+          className="flex flex-col items-center text-center"
           animate={{ opacity: isAnimating ? 0 : 1, y: isAnimating ? -10 : 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="font-serif text-ink-light tracking-[0.3em] uppercase text-xs mb-3 font-medium">
+          <span className="font-serif text-ink-light tracking-[0.3em] uppercase text-xs mb-2 font-medium">
             Thiệp Báo Hỷ
           </span>
-          <p className="font-script text-ink text-4xl leading-relaxed">
+          <p className="font-script text-ink text-2xl md:text-4xl leading-relaxed">
             Sự hiện diện của bạn là niềm vinh hạnh
           </p>
         </motion.div>
 
-        {/* Envelope Container with gentle breathing animation */}
+        {/* Envelope Container */}
         <motion.div 
-          className="relative w-[90vw] max-w-xl aspect-[1.4] cursor-pointer"
+          className="relative w-[85vw] max-w-xl aspect-[1.4] cursor-pointer flex-shrink-0"
           onClick={handleOpen}
           animate={{ y: isAnimating ? 0 : [0, -6, 0] }}
           transition={{ duration: 4, repeat: isAnimating ? 0 : Infinity, ease: 'easeInOut' }}
@@ -145,7 +144,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
         <motion.div
           animate={{ opacity: isAnimating ? 0 : 1, y: isAnimating ? 10 : 0 }}
           transition={{ duration: 0.6 }}
-          className="mt-16 md:mt-20 flex flex-col items-center"
+          className="flex flex-col items-center"
         >
           <div className="w-[1px] h-8 bg-ink/20 mb-6" />
           <button

@@ -153,14 +153,14 @@ export default function Invitation() {
             (Nhằm ngày 21 tháng 05 năm Bính Ngọ)
           </motion.p>
           <motion.div
-            className="flex flex-col items-center mb-8"
+            className="flex flex-col px-6 items-center mb-8"
             initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
             transition={{ duration: 0.9, delay: 0.3 }}
           >
             <svg className="w-5 h-5 text-[#904C4C] mb-2" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
             </svg>
-            <p className="text-sm md:text-base tracking-[0.25em] uppercase text-ink font-serif">Được cử hành tại Tư Gia</p>
+            <p className="md:text-base uppercase text-ink font-serif">Được cử hành tại Tư Gia</p>
           </motion.div>
           <motion.div
             className="w-full aspect-[16/9] relative overflow-hidden"
@@ -197,7 +197,7 @@ export default function Invitation() {
             Nhà Trai
           </motion.p>
           <motion.p
-            className="text-sm md:text-xl tracking-[0.2em] uppercase text-ink/80 font-bold mb-2"
+            className="md:text-xl px-6 uppercase text-ink/80 font-bold mb-2"
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={VP}
             transition={{ duration: 1, delay: 0.2 }}
           >

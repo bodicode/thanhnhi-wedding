@@ -4,23 +4,27 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 function Petal({ index }: { index: number }) {
-  const shapes = ['❀', '✿', '❁', '✾', '🌸', '✦', '✧', '❋'];
-  const shape = shapes[index % shapes.length];
-  const size = 10 + (index % 5) * 4;
-  const left = (index * 13.7 + 5) % 95;
   const delay = (index * 0.7) % 6;
   const duration = 6 + (index % 4) * 2;
+  const left = (index * 13.7 + 5) % 92;
+  const size = 8 + (index % 3) * 4;
   const drift = (index % 2 === 0 ? 1 : -1) * (20 + (index % 3) * 15);
 
   return (
     <motion.div
-      className="absolute top-0 pointer-events-none select-none"
-      style={{ left: `${left}%`, fontSize: size, opacity: 0 }}
+      className="absolute top-0 pointer-events-none"
+      style={{
+        left: `${left}%`,
+        width: size,
+        height: size * 1.5,
+        background: index % 2 === 0 ? '#C3AC8F' : '#D4B070',
+        borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%',
+        opacity: 0.6,
+      }}
       animate={{
         y: ['0vh', '110vh'],
+        rotate: [0, 360],
         x: [0, drift, -drift / 2, drift / 3],
-        opacity: [0, 0.7, 0.5, 0],
-        rotate: [0, 360 * (index % 2 === 0 ? 1 : -1)],
       }}
       transition={{
         duration,
@@ -28,19 +32,14 @@ function Petal({ index }: { index: number }) {
         repeat: Infinity,
         ease: 'linear',
       }}
-    >
-      <span style={{ color: index % 3 === 0 ? '#C3AC8F' : index % 3 === 1 ? '#E8C4B8' : '#F5E6D3' }}>
-        {shape}
-      </span>
-    </motion.div>
+    />
   );
 }
 
-// Sparkle dot
 function Sparkle({ index }: { index: number }) {
-  const left = (index * 17.3 + 10) % 90;
-  const top = (index * 23.1 + 5) % 85;
   const delay = (index * 0.4) % 3;
+  const left = (index * 17.3 + 10) % 92;
+  const top = (index * 23.1 + 5) % 85;
 
   return (
     <motion.div
@@ -215,7 +214,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
               <div className="absolute top-2 left-2 sm:top-4 sm:left-4 text-[8px] sm:text-[10px] opacity-40" style={{ color: '#C3AC8F' }}>❀ ✦ ❀</div>
               <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 text-[8px] sm:text-[10px] opacity-40" style={{ color: '#C3AC8F' }}>❀ ✦ ❀</div>
               <div className="flex flex-col items-center px-4 text-center pt-6 md:pt-8">
-                <span className="font-script text-2xl sm:text-4xl lg:text-5xl break-words max-w-full" style={{ color: '#5C3D2E' }}>Quý Thanh &amp; Uyển Nhi</span>
+                <span className="font-script text-2xl sm:text-4xl lg:text-5xl break-words max-w-full" style={{ color: '#5C3D2E' }}>Phêrô Quý Thanh &amp; Lucia Uyển Nhi</span>
                 <div className="mt-1 sm:mt-2 text-[8px] sm:text-[9px] tracking-[0.2em] sm:tracking-[0.3em] uppercase font-serif opacity-50" style={{ color: '#8C6A4A' }}>
                   Trân trọng kính mời
                 </div>

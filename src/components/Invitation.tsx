@@ -111,7 +111,7 @@ export default function Invitation() {
 
         {/* Lễ Tân Hôn */}
         <motion.div
-          className="w-full max-w-5xl mx-auto lex flex-col items-center text-center"
+          className="w-full max-w-7xl mx-auto lex flex-col items-center text-center"
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
           transition={{ duration: 1 }}
         >
@@ -167,7 +167,7 @@ export default function Invitation() {
             initial={{ opacity: 0, scale: 1.04 }} whileInView={{ opacity: 1, scale: 1 }} viewport={VP}
             transition={{ duration: 1.5 }}
           >
-            <Image src="/letanhon.jpg" alt="Lễ Tân Hôn" fill className="object-cover object-center" sizes="100vw" quality={75} />
+            <Image src="/letanhon.jpg" alt="Lễ Tân Hôn" fill className="object-cover object-bottom" sizes="100vw" quality={75} />
           </motion.div>
         </motion.div>
 
@@ -204,11 +204,11 @@ export default function Invitation() {
             ĐƯỢC TỔ CHỨC TẠI TRUNG TÂM HỘI NGHỊ TIỆC CƯỚI
           </motion.p>
           <motion.div
-            className="relative w-48 md:w-64 h-20 md:h-28 mb-2"
+            className="relative w-48 md:w-68 h-20 md:h-30 my-4"
             initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={VP}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            <Image src="/logo-golden-palace.png" alt="Golden Palace" fill className="object-contain" sizes="256px" quality={75} />
+            <Image src="/logo-golden-palace.png" alt="Golden Palace" fill className="object-cover" sizes="256px" quality={75} />
           </motion.div>
           <motion.p
             className="text-sm md:text-base tracking-[0.15em] uppercase text-ink/70 font-serif mb-8"
@@ -226,17 +226,17 @@ export default function Invitation() {
             <div className="w-px h-10 bg-ink-light/40" />
             <span className="font-serif font-bold text-2xl md:text-4xl text-ink">05/07/2026</span>
             <div className="w-px h-10 bg-ink-light/40" />
-            <span className="font-serif font-bold text-xl md:text-3xl tracking-widest uppercase text-ink">Chủ<br />Nhật</span>
+            <span className="font-serif font-bold text-xl md:text-3xl tracking-widest uppercase text-ink">Chủ Nhật</span>
           </motion.div>
           <motion.p
-            className="text-sm text-ink/70 italic mb-10"
+            className="text-ink/70 italic mb-10"
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={VP}
             transition={{ duration: 1, delay: 0.3 }}
           >
             (Nhằm ngày 21 tháng 05 năm Bính Ngọ)
           </motion.p>
           <motion.div
-            className="flex flex-col items-center mb-4 w-full"
+            className="flex flex-col items-center mb-10 w-full"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
             transition={{ duration: 1, delay: 0.1 }}
           >
@@ -247,7 +247,7 @@ export default function Invitation() {
               <p className="text-sm md:text-base tracking-[0.25em] uppercase text-ink font-serif font-semibold">Địa Điểm</p>
             </div>
             <motion.div
-              className="w-full max-w-4xl aspect-[16/9] relative overflow-hidden rounded shadow-md mb-4"
+              className="w-full max-w-5xl aspect-[16/9] relative overflow-hidden rounded shadow-md mb-4"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
               transition={{ duration: 1.2 }}
             >

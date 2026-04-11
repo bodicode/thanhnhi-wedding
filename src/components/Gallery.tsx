@@ -4,16 +4,26 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import Image from 'next/image';
 
-const IMAGE_NAMES = Array.from({ length: 28 }, (_, i) => `${i + 1}.jpg`);
+const IMAGE_NAMES = Array.from({ length: 11 }, (_, i) => `${i + 1}.jpg`);
 
 export default function Gallery() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showLightbox, setShowLightbox] = useState(false);
   const thumbsRef = useRef<HTMLDivElement>(null);
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
+  const isUserInteractionRef = useRef(false);
+
+  const resetAutoPlayTimer = useCallback(() => {
+    if (autoPlayRef.current) {
+      clearTimeout(autoPlayRef.current);
+    }
+    isUserInteractionRef.current = true;
+  }, []);
 
   const goTo = useCallback((i: number) => {
+    resetAutoPlayTimer();
     setActiveIndex((i + IMAGE_NAMES.length) % IMAGE_NAMES.length);
-  }, []);
+  }, [resetAutoPlayTimer]);
 
   useEffect(() => {
     if (!thumbsRef.current) return;
@@ -26,9 +36,30 @@ export default function Gallery() {
   }, [activeIndex]);
 
   useEffect(() => {
+    // Setup or reset timer based on user interaction flag
+    if (!showLightbox) {
+      if (isUserInteractionRef.current) {
+        isUserInteractionRef.current = false;
+      }
+      autoPlayRef.current = setTimeout(() => {
+        setActiveIndex((prev) => (prev + 1) % IMAGE_NAMES.length);
+      }, 6000);
+    }
+    return () => {
+      if (autoPlayRef.current) {
+        clearTimeout(autoPlayRef.current);
+      }
+    };
+  }, [activeIndex, showLightbox]);
+
+  useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') goTo(activeIndex + 1);
-      if (e.key === 'ArrowLeft') goTo(activeIndex - 1);
+      if (e.key === 'ArrowRight') {
+        goTo(activeIndex + 1);
+      }
+      if (e.key === 'ArrowLeft') {
+        goTo(activeIndex - 1);
+      }
       if (e.key === 'Escape') setShowLightbox(false);
     };
     window.addEventListener('keydown', onKey);
@@ -77,7 +108,7 @@ export default function Gallery() {
           <AnimatePresence mode="popLayout">
             <motion.div
               key={activeIndex}
-              className="cursor-zoom-in rounded-sm overflow-hidden shadow-2xl w-full h-full flex items-center justify-center"
+              className="cursor-zoom-in rounded-sm overflow-hidden w-full h-full flex items-center justify-center"
               onClick={() => setShowLightbox(true)}
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
@@ -167,7 +198,7 @@ export default function Gallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 backdrop-blur-md"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/93 backdrop-blur-md"
             onClick={() => setShowLightbox(false)}
           >
             {/* Close Button */}

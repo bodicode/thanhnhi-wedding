@@ -8,7 +8,6 @@ export default function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Initialization: setup volume and attempt autoplay once
     if (audioRef.current) {
       audioRef.current.volume = 0.4;
       const playPromise = audioRef.current.play();
@@ -23,22 +22,14 @@ export default function MusicPlayer() {
     }
   }, []);
 
-  useEffect(() => {
-    const handleToggle = () => toggleMusic();
-    window.addEventListener('toggle-wedding-music', handleToggle);
-    return () => window.removeEventListener('toggle-wedding-music', handleToggle);
-  }, [isPlaying]);
-
   const toggleMusic = () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
-        setIsPlaying(false);
       } else {
-        audioRef.current.play()
-          .then(() => setIsPlaying(true))
-          .catch(e => console.error("Play failed", e));
+        audioRef.current.play();
       }
+      setIsPlaying(!isPlaying);
     }
   };
 
@@ -77,7 +68,6 @@ export default function MusicPlayer() {
           )}
         </AnimatePresence>
 
-        {/* Music Icon / Vinyl Style */}
         <div className="relative flex items-center justify-center">
           <motion.div
             animate={isPlaying ? { rotate: 360 } : { rotate: 0 }}

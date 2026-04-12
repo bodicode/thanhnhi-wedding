@@ -27,12 +27,12 @@ export default function Hero() {
                 </motion.div>
 
                 {/* Text Overlay on Image */}
-                <div className="absolute inset-x-0 bottom-12 lg:bottom-20 flex flex-col items-center justify-center text-white z-10 px-6 w-full lg:inset-x-0 lg:top-auto inset-0">
+                <div className="absolute inset-x-0 bottom-12 lg:bottom-20 flex flex-col items-center justify-center text-white z-10 px-0 w-full lg:inset-x-0 lg:top-auto inset-0">
                     <motion.h2
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.5 }}
-                        className="font-script text-6xl md:text-9xl lg:text-[10rem] mb-4 drop-shadow-lg text-center w-full"
+                        className="font-script text-[3rem] xs:text-[3.5rem] sm:text-[5rem] md:text-[8rem] lg:text-[10rem] mb-4 drop-shadow-lg text-center w-full whitespace-nowrap"
                     >
                         We get married!
                     </motion.h2>
@@ -42,7 +42,7 @@ export default function Hero() {
                         transition={{ duration: 1, delay: 0.8 }}
                         className="flex flex-col items-center text-center w-full"
                     >
-                        <h1 className="font-serif text-[20px] md:text-4xl lg:tracking-[0.2em] lg:font-medium uppercase drop-shadow-md text-center w-full">
+                        <h1 className="font-serif text-[18px] xs:text-[20px] sm:text-2xl md:text-3xl lg:text-4xl sm:tracking-[0.05em] lg:tracking-[0.2em] font-medium uppercase drop-shadow-md text-center w-full whitespace-nowrap">
                             PHÊRÔ QUÝ THANH & LUCIA UYỂN NHI
                         </h1>
                         <div className="w-12 h-[1px] bg-white/60 mt-4 lg:mt-6" />

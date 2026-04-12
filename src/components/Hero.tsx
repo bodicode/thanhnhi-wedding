@@ -32,7 +32,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="font-script text-7xl md:text-[10rem] mb-4 drop-shadow-lg text-center w-full"
+            className="font-script text-[3rem] xs:text-[3.5rem] sm:text-[5rem] md:text-[8rem] lg:text-[10rem] mb-4 drop-shadow-lg text-center w-full whitespace-nowrap"
           >
             We get married!
           </motion.h2>
@@ -42,7 +42,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.8 }}
             className="flex flex-col items-center text-center w-full"
           >
-            <h1 className="font-serif text-2xl md:text-4xl tracking-widest md:tracking-[0.2em] font-medium uppercase drop-shadow-md text-center w-full">
+            <h1 className="font-serif text-[1rem] xs:text-[1.1rem] sm:text-2xl md:text-4xl tracking-[0.08em] sm:tracking-widest md:tracking-[0.2em] font-medium uppercase drop-shadow-md text-center w-full whitespace-nowrap">
               QUÝ THANH & UYỂN NHI
             </h1>
             <div className="w-12 h-[1px] bg-white/60 mt-4 md:mt-6" />

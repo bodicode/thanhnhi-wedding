@@ -16,8 +16,8 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata: Metadata = {
-  title: "Thiệp Cưới Online | Thanh & Nhi",
-  description: "Trân trọng kính mời bạn đến tham dự và chung vui trong ngày trọng đại của chúng tôi.",
+  title: 'Thành & Nhi - Lễ Thành Hôn',
+  description: 'Thiệp cưới của Thành & Nhi. Kính mời quý khách đến tham dự và chung vui trong ngày trọng đại.',
 };
 
 export default function RootLayout({

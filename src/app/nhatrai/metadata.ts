@@ -1,6 +1,20 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Thanh & Nhi | Lễ Thành Hôn',
-  description: 'Lễ thành hôn nhà trai của Thanh & Nhi - trân trọng kính mời đến chung vui cùng gia đình.',
+  title: 'Lễ Thành Hôn Thanh & Nhi',
+  description: 'Thiệp mời lễ thành hôn của Thanh & Nhi.',
+  openGraph: {
+    title: 'Lễ Thành Hôn Thanh & Nhi',
+    description: 'Thiệp mời lễ thành hôn của Thanh & Nhi.',
+    url: 'https://thanhnhi-wedding.vercel.app/nhatrai',
+    siteName: 'Thành & Nhi Wedding',
+    locale: 'vi_VN',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Lễ Thành Hôn Thanh & Nhi',
+    description: 'Thiệp mời lễ thành hôn của Thanh & Nhi.',
+    images: ['https://thanhnhi-wedding.vercel.app/og-nhatrai.jpg'],
+  },
 };

@@ -88,7 +88,7 @@ export default function Invitation() {
                     >
                         <div className="grid grid-cols-2 gap-2 md:gap-10 items-stretch">
                             {[
-                                { title: 'Nhà Gái', bo: 'ĐAMINH Đinh Nguyễn Thụy Ngân', me: 'TÊRÊSA Hoàng Thị Thu Hiền', addr: 'P. Tân Triều, T. Đồng Nai' },
+                                { title: 'Nhà Gái', bo: 'Đa Minh Đinh Nguyễn Thụy Ngân', me: 'Têrêsa Hoàng Thị Thu Hiền', addr: 'P. Tân Triều, T. Đồng Nai' },
                                 { title: 'Nhà Trai', bo: 'Phùng Văn Thanh', me: 'Phan Thị Thanh', addr: 'P. Trấn Biên, T. Đồng Nai' },
                             ].map((f, i) => (
                                 <motion.div

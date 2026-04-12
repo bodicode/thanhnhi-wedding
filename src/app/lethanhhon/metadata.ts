@@ -12,9 +12,8 @@ export const metadata: Metadata = {
     type: 'website',
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Lễ Thành Hôn Thanh & Nhi',
     description: 'Thiệp mời lễ thành hôn của Thanh & Nhi.',
-    images: ['https://thanhnhi-wedding.vercel.app/og-nhatrai.jpg'],
   },
 };

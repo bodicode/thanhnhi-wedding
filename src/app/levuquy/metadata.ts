@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Lễ vu quy Thanh & Nhi',
     description: 'Thiệp mời lễ vu quy của Thanh & Nhi.',
   },

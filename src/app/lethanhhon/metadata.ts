@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Lễ Thành Hôn Thanh & Nhi',
     description: 'Thiệp mời lễ thành hôn của Thanh & Nhi.',
-    url: 'https://thanhnhi-wedding.vercel.app/nhatrai',
+    url: 'https://thanhnhi-wedding.vercel.app/lethanhhon',
     siteName: 'Thành & Nhi Wedding',
     locale: 'vi_VN',
     type: 'website',

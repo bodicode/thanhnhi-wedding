@@ -16,7 +16,7 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata: Metadata = {
-  title: "Thanh & Nhi - Lễ Thành Hôn",
+  title: "Thiệp cưới Thanh & Nhi",
   description: "Thiệp cưới của Thanh & Nhi",
 };
 

@@ -45,8 +45,8 @@ export default function Invitation() {
                         >
                             <div className="text-center">
                                 <span className="font-script text-4xl md:text-6xl text-ink leading-none block mb-2 md:mb-4">{p.role}</span>
-                                <h1 className="font-serif text-xl md:text-7xl text-ink font-bold tracking-wider uppercase mb-1 md:mb-1 leading-tight">{p.name}</h1>
                                 <p className="text-sm md:text-xl uppercase text-ink/70 font-semibold tracking-wider mb-2">{p.saint}</p>
+                                <h1 className="font-serif text-xl md:text-7xl text-ink font-bold tracking-wider uppercase mb-1 md:mb-1 leading-tight">{p.name}</h1>
                             </div>
                             <div className="w-full aspect-[3/4] relative overflow-hidden bg-stone-100 shadow-[10px_10px_30px_rgba(0,0,0,0.05)] md:shadow-[20px_20px_60px_rgba(0,0,0,0.05)] border-4 md:border-8 border-white ring-1 ring-black/5">
                                 <Image src={p.src} alt={p.alt} fill className="object-cover hover:scale-105 transition-transform duration-1000" sizes="(max-width: 768px) 50vw, 50vw" priority quality={p.quality} />
@@ -110,26 +110,31 @@ export default function Invitation() {
                     </motion.div>
                 </div>
 
-                {/* Lễ Tân Hôn */}
                 <motion.div
-                    className="w-full max-w-7xl mx-auto lex flex-col items-center text-center"
+                    className="w-full max-w-7xl mx-auto flex flex-col items-center text-center md:mt-8"
                     initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
                     transition={{ duration: 1 }}
                 >
-                    <div className="flex items-center justify-center gap-4 mb-10">
-                        <motion.div className="h-[1px] bg-gradient-to-r from-transparent to-gold-accent" initial={{ width: 0 }} whileInView={{ width: 48 }} viewport={VP} transition={{ duration: 0.8 }} />
-                        <span className="text-gold-accent text-xs">✦</span>
-                        <motion.div className="h-[1px] bg-gradient-to-l from-transparent to-gold-accent" initial={{ width: 0 }} whileInView={{ width: 48 }} viewport={VP} transition={{ duration: 0.8 }} />
-                    </div>
-                    <motion.span
-                        className="font-script text-4xl md:text-7xl text-ink mb-6 block"
+                    <motion.div
+                        className="mb-8 flex justify-center"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={VP}
+                        transition={{ duration: 1 }}
+                    >
+                        <svg width="30" height="40" viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-ink">
+                            <path d="M12 0V36M5 11H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                        </svg>
+                    </motion.div>
+                    <motion.h3
+                        className="text-xl md:text-5xl uppercase text-ink font-serif font-bold mb-4 leading-tight max-w-4xl mx-auto px-4"
                         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
                         transition={{ duration: 1, delay: 0.1 }}
                     >
-                        Lễ Vu Quy
-                    </motion.span>
+                        Hôn Lễ được cử hành tại THÁNH ĐƯỜNG GIÁO XỨ BIÊN HÒA
+                    </motion.h3>
                     <motion.p
-                        className="text-sm md:text-base tracking-[0.2em] uppercase text-ink/80 font-serif mb-6"
+                        className="text-sm md:text-base tracking-[0.2em] uppercase text-ink/80 font-serif mb-6 mt-4"
                         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={VP}
                         transition={{ duration: 1, delay: 0.2 }}
                     >
@@ -153,16 +158,6 @@ export default function Invitation() {
                     >
                         (Nhằm ngày 20 tháng 05 năm Bính Ngọ)
                     </motion.p>
-                    <motion.div
-                        className="flex flex-col items-center mb-8 px-6"
-                        initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
-                        transition={{ duration: 0.9, delay: 0.3 }}
-                    >
-                        <svg className="w-5 h-5 text-[#904C4C] mb-2" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                        </svg>
-                        <p className="md:text-xl px-6 uppercase text-ink/80 font-bold mb-2">Được cử hành tại THÁNH ĐƯỜNG GIÁO XỨ BIÊN HÒA</p>
-                    </motion.div>
                     <motion.div
                         className="w-full aspect-[16/9] relative overflow-hidden"
                         initial={{ opacity: 0, scale: 1.04 }} whileInView={{ opacity: 1, scale: 1 }} viewport={VP}
@@ -188,7 +183,7 @@ export default function Invitation() {
                         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP}
                         transition={{ duration: 1, delay: 0.1 }}
                     >
-                        Lễ Thành Hôn
+                        Lễ Vu Quy
                     </motion.span>
                     <motion.p
                         className="text-sm md:text-lg tracking-[0.2em] uppercase text-ink/70 mb-10"

@@ -1,49 +1,60 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 
+/* ── CSS-animated Petal (GPU-composited) ── */
 function Petal({ index }: { index: number }) {
   const shapes = ['❀', '✿', '❁', '✾', '🌸', '✦', '✧', '❋'];
   const shape = shapes[index % shapes.length];
+  const color = index % 3 === 0 ? '#C3AC8F' : index % 3 === 1 ? '#E8C4B8' : '#F5E6D3';
   const size = 10 + (index % 5) * 4;
   const left = (index * 13.7 + 5) % 95;
   const delay = (index * 0.7) % 6;
-  const duration = 6 + (index % 4) * 2;
+  const duration = 8 + (index % 4) * 3;
   const drift = (index % 2 === 0 ? 1 : -1) * (20 + (index % 3) * 15);
+  const rotDir = index % 2 === 0 ? 360 : -360;
+
+  const animName = `petal-fall-${index}`;
+  const keyframes = `
+    @keyframes ${animName} {
+      0%   { transform: translate3d(0, -5%, 0) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.7; }
+      50%  { transform: translate3d(${drift}px, 50vh, 0) rotate(${rotDir / 2}deg); opacity: 0.5; }
+      80%  { opacity: 0.3; }
+      100% { transform: translate3d(${-drift / 2}px, 110vh, 0) rotate(${rotDir}deg); opacity: 0; }
+    }
+  `;
 
   return (
-    <motion.div
-      className="absolute top-0 pointer-events-none select-none"
-      style={{ left: `${left}%`, fontSize: size, opacity: 0 }}
-      animate={{
-        y: ['0vh', '110vh'],
-        x: [0, drift, -drift / 2, drift / 3],
-        opacity: [0, 0.7, 0.5, 0],
-        rotate: [0, 360 * (index % 2 === 0 ? 1 : -1)],
-      }}
-      transition={{
-        duration,
-        delay,
-        repeat: Infinity,
-        ease: 'linear',
-      }}
-    >
-      <span style={{ color: index % 3 === 0 ? '#C3AC8F' : index % 3 === 1 ? '#E8C4B8' : '#F5E6D3' }}>
+    <>
+      <style>{keyframes}</style>
+      <div
+        className="absolute top-0 pointer-events-none select-none"
+        style={{
+          left: `${left}%`,
+          fontSize: size,
+          color,
+          willChange: 'transform, opacity',
+          animation: `${animName} ${duration}s ${delay}s linear infinite`,
+          opacity: 0,
+        }}
+      >
         {shape}
-      </span>
-    </motion.div>
+      </div>
+    </>
   );
 }
 
-// Sparkle dot
+/* ── CSS-animated Sparkle (GPU-composited) ── */
 function Sparkle({ index }: { index: number }) {
   const left = (index * 17.3 + 10) % 90;
   const top = (index * 23.1 + 5) % 85;
   const delay = (index * 0.4) % 3;
+  const duration = 2.5 + (index % 3);
 
   return (
-    <motion.div
+    <div
       className="absolute pointer-events-none rounded-full"
       style={{
         left: `${left}%`,
@@ -51,16 +62,9 @@ function Sparkle({ index }: { index: number }) {
         width: index % 2 === 0 ? 3 : 2,
         height: index % 2 === 0 ? 3 : 2,
         background: index % 3 === 0 ? '#C3AC8F' : '#F5E6D3',
-      }}
-      animate={{
-        opacity: [0, 1, 0],
-        scale: [0.5, 1.5, 0.5],
-      }}
-      transition={{
-        duration: 2 + (index % 3),
-        delay,
-        repeat: Infinity,
-        ease: 'easeInOut',
+        willChange: 'transform, opacity',
+        animation: `sparkle-pulse ${duration}s ${delay}s ease-in-out infinite`,
+        opacity: 0,
       }}
     />
   );
@@ -71,7 +75,6 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
-    // Lock scroll when envelope is shown
     document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = '';
@@ -86,8 +89,8 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
     }, 1000);
   };
 
-  const petals = Array.from({ length: 18 }, (_, i) => i);
-  const sparkles = Array.from({ length: 24 }, (_, i) => i);
+  const petals = useMemo(() => Array.from({ length: 12 }, (_, i) => i), []);
+  const sparkles = useMemo(() => Array.from({ length: 16 }, (_, i) => i), []);
 
   return (
     <motion.div
@@ -105,12 +108,12 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: 'radial-gradient(circle at 20% 30%, rgba(195,172,143,0.1) 0%, transparent 50%)' }} />
 
-      {/* Falling petals */}
+      {/* Falling petals — CSS animations for GPU compositing */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {petals.map(i => <Petal key={i} index={i} />)}
       </div>
 
-      {/* Sparkle dots */}
+      {/* Sparkle dots — CSS animations for GPU compositing */}
       <div className="absolute inset-0 pointer-events-none">
         {sparkles.map(i => <Sparkle key={i} index={i} />)}
       </div>
@@ -137,7 +140,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
         </motion.div>
       ))}
 
-      <div className="flex flex-col items-center justify-between z-10 w-full max-w-3xl relative px-4 h-full py-6 md:py-10">
+      <div className="flex flex-col items-center gap-5 md:gap-8 z-10 w-full max-w-3xl relative px-4 py-4 md:py-10">
 
         {/* Header text */}
         <motion.div
@@ -168,12 +171,15 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
 
         {/* Envelope Container */}
         <motion.div
-          className="relative w-[95vw] max-w-3xl aspect-[1.4] cursor-pointer flex-shrink-0"
+          className="relative w-[80vw] max-w-2xl aspect-[1.4] cursor-pointer"
+          style={{
+            maxHeight: '46vh',
+            animation: isAnimating ? 'none' : 'envelope-float 3.5s ease-in-out infinite',
+            willChange: 'transform',
+          }}
           onClick={handleOpen}
           onHoverStart={() => setHovered(true)}
           onHoverEnd={() => setHovered(false)}
-          animate={{ y: isAnimating ? 0 : [0, -8, 0] }}
-          transition={{ duration: 3.5, repeat: isAnimating ? 0 : Infinity, ease: 'easeInOut' }}
           whileHover={{ scale: 1.02 }}
         >
           {/* Glow behind envelope */}

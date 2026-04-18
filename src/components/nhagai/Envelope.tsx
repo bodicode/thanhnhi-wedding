@@ -156,7 +156,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
           </span>
           <p className="font-script text-xl sm:text-2xl md:text-4xl leading-relaxed"
             style={{ color: '#5C3D2E' }}>
-            Sự hiện diện của bạn là niềm vinh hạnh
+            Sự hiện diện của bạn là niềm vinh hạnh của chúng tôi
           </p>
           <div className="flex items-center gap-3 mt-3">
             <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#C3AC8F]" />
